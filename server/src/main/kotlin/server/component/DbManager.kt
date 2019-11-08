@@ -17,7 +17,7 @@ class DbManager(var client: PgPool) {
      * @return 書籍情報
      */
     fun select(): List<BookInfo> {
-        return client.rxPreparedQuery("SELECT * FROM book_info")
+        return client.rxPreparedQuery("SELECT ROW_NUMBER() OVER () AS no, * FROM book_info")
                 .map<List<BookInfo>> {
                     val result = mutableListOf<BookInfo>()
                     val ite = it.iterator()

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>書籍管理</title>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.7.8/dist/semantic.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.7.8/dist/semantic.min.js"></script>
+    <script>
+
+      // サーバURL
+      const server_url = 'http://localhost:8080';
+
+      // 一覧データ
+      var table_obj = [];
+
+      // 初期表示処理
+      window.onload = function() {
+
+        // 初回検索
+        searchList('/read');
+      }
+
+      // 一覧データ取得
+      function searchList(url){
+        $.ajax({
+          url: server_url + url
+        }).done(function(res) {
+          setTable(res);
+        }).fail(function(XMLHttpRequest, textStatus, errorThrown) {
+        });
+      }
+
+      // テーブル設定処理
+      function setTable(res) {
+        $('tbody').empty();
+        res.forEach(function(obj) {
+          var contents = $('<tr>')
+            .append('<td>' + obj.no +'</td>')
+            .append('<td>' + obj.book_name + '</td>')
+            .append('<td>' + obj.author_name + '</td>')
+            .append('<td>' + obj.page + '</td>')
+            .append('<td>' + obj.publisher + '</td>')
+            .append('<td>' + obj.sale_date + '</td>')
+            .append('<td>' + obj.isbn + '</td>')
+            .append('<td>' + obj.book_note + '</td>')
+            .append('<td><i class="black edit icon"></i></td>')
+            .append('<td><i class="red times circle icon"></i></td>')
+            .append('</tr>');
+          $('tbody').append(contents);
+        });
+        table_obj = res.book_info;
+      }
+    </script>
+  </head>
+  <body>
+    <div class="ui inverted menu">
+        <a href="." class="header item">
+          <i class="book icon"></i>書籍管理
+        </a>
+    </div>
+    <div class="header_space"></div>
+
+    <div id="list_area" class="column">
+      <div class="ui green segment">
+        <h4 class="ui horizontal left aligned divider header">
+          <i class="table icon"></i>書籍一覧
+        </h4>
+        <!-- 書籍一覧 -->
+        <table class="ui small compact celled striped table">
+          <thead>
+            <tr>
+              <th class="table_no">No.</th>
+              <th>書籍名</th>
+              <th>著者</th>
+              <th class="table_page">ページ数</th>
+              <th>出版社</th>
+              <th>発売日</th>
+              <th>ISBN</th>
+              <th>備考</th>
+              <th class="table_icon">編集</th>
+              <th class="table_icon">削除</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+          <tfoot id="pager_area"></tfoot>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>
