@@ -7,6 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.7.8/dist/semantic.min.css">
     <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.7.8/dist/semantic.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/2.3.22/rx.lite.js"></script>
     <script>
 
       // サーバURL
@@ -17,6 +18,9 @@
 
       // 初期表示処理
       window.onload = function() {
+
+        // インクリメンタルサーチの設定
+        setIncrementalSearch('#search_area', '#search_box');
 
         // 初回検索
         searchList('/read');
@@ -52,13 +56,78 @@
         });
         table_obj = res.book_info;
       }
+
+      function setIncrementalSearch(area, box){
+
+        // ヘッダの検索ボックス
+
+        // 検索ボックスの設定
+        $(area)
+          .search({
+            apiSettings:  {
+              url: server_url + '/read/author/{query}'
+            }
+          });
+
+        // 検索条件のストリーム
+        var queryStream = Rx.Observable.fromEvent($(box), 'input')
+          .map(function(e) {
+          return e.target.value;
+        });
+
+        // URLのストリーム
+        var urlStream = queryStream
+          .throttle(300)
+          .distinctUntilChanged()
+          .map(function(query) {
+            return server_url + '/read/' + encodeURIComponent(query);
+        });
+
+        // ローディングのストリーム
+        var loadingStream = new Rx.Subject();
+
+        // 検索のストリーム
+        var searchStream = urlStream
+            .flatMap(function(query) {
+                loadingStream.onNext(true);
+                return Rx.Observable.fromPromise($.ajax({url: query}))
+                    .finally(function() { loadingStream.onNext(false); });
+            })
+            .map(function(res) {
+                return res;
+            });
+
+        // ローディングのサブスクライブ
+        loadingStream.subscribe(function(loading) {
+            if (loading) {
+                $('#searchBox').addClass('loading');
+            } else {
+                $('#searchBox').removeClass('loading');
+            }
+        });
+
+        // 検索のサブスクライブ
+        searchStream.subscribe(function(res) {
+          // テーブル
+          setTable(res);
+        });
+      }
     </script>
   </head>
   <body>
     <div class="ui inverted menu">
-        <a href="." class="header item">
-          <i class="book icon"></i>書籍管理
-        </a>
+      <a href="." class="header item">
+        <i class="book icon"></i>書籍管理
+      </a>
+      <div class="ui labeled input">
+        <div id="search_area" class="ui search">
+          <div class="ui icon input">
+            <input id="search_box" class="prompt" type="text" placeholder="著者">
+            <i class="search icon"></i>
+          </div>
+          <div class="results"></div>
+        </div>
+      </div>
     </div>
     <div class="header_space"></div>
 

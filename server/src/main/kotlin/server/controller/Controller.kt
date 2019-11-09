@@ -18,10 +18,24 @@ class Controller(var dbManager: DbManager) {
     /**
      * 書籍情報取得処理
      *
+     * @param authorName 筆者
+     *
      * @return 書籍情報（JSON）
      */
-    @Get("/read")
-    fun read(): String {
-        return service.read()
+    @Get("/read{/authorName}")
+    fun read(authorName: String?): String {
+        return service.read(authorName)
+    }
+
+    /**
+     * 著者情報取得処理
+     *
+     * @param authorName 著者
+     *
+     * @return 著者情報（JSON）
+     */
+    @Get("/read/author/{authorName}")
+    fun readAuthor(authorName: String): String {
+        return service.readAuthor(authorName)
     }
 }
