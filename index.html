@@ -13,17 +13,134 @@
       // サーバURL
       const server_url = 'http://localhost:8080';
 
+      // true:編集エリア表示、false:編集エリア非表示
+      var right_area = false;
+
+      // 1:新規登録,2:編集
+      var mode = 1;
+
       // 一覧データ
       var table_obj = [];
+
+      // 新規登録入力フォーム保存
+      var create_form = {};
+
+      // フォーム項目配列
+      const form_items = ['book_id', 'book_name', 'page', 'publisher', 'isbn', 'sale_date',
+        'book_note', 'author_name', 'author_note', 'book_update_date', 'author_update_date'];
 
       // 初期表示処理
       window.onload = function() {
 
+        // 新規登録ボタン非表示
+        $('#create').hide();
+
+        // ISBNテキストボックスの設定
+        $('#isbn').on("keypress", function(event){return leaveOnlyNumber(event);});
+
+        // ページ数テキストボックスの設定
+        $('#page').on("keypress", function(event){return leaveOnlyNumber(event);});
+
+        // カレンダーの設定
+        $('.ui.calendar').calendar({
+          monthFirst: false,
+          type: 'date',
+          formatter: {
+            date: function (date, settings) {
+              if (!date) return '';
+              var day = date.getDate();
+              var month = date.getMonth() + 1;
+              var year = date.getFullYear();
+              return year + '/' + ('0' + month).slice(-2) + '/' + ('0' + day).slice(-2);
+            }
+          }
+        });
+
+        // 編集パネルの初期設定
+        $('#input_area').transition('hide');
+
         // インクリメンタルサーチの設定
-        setIncrementalSearch('#search_area', '#search_box');
+        setIncrementalSearch('#search_area', '#search_box', 1);
+        setIncrementalSearch('#author_name_field', '#author_name', 2);
 
         // 初回検索
         searchList('/read');
+
+        // submit()に関数をバインド
+        $('form').submit(function() {
+
+          var json = {
+                book_id : $('#book_id').val(),
+                book_name : $('#book_name').val(),
+                page : $('#page').val(),
+                publisher : $('#publisher').val(),
+                isbn : $('#isbn').val(),
+                sale_date : $('#sale_date').val(),
+                book_note : $('#book_note').val(),
+                author_name :  $('#author_name').val(),
+                author_note : $('#author_note').val(),
+                book_update_date : $('#book_update_date').val(),
+                author_update_date : $('#author_update_date').val()
+          };
+
+           if(mode === 1) {
+              // CREATE POST
+              postRequest(1, '登録', 'create', $('#book_name').val(), json)
+            } else {
+              // UPDATE POST
+              postRequest(2, '更新', 'update', $('#book_name').val(), json)
+          }
+          return false;
+        });
+      }
+
+      // 登録・編集
+      function postRequest(type, ope, url, target, json) {
+
+        // モーダルの作成
+        $('#modal_title').text('書籍の' + ope);
+        $('#modal_message').text('「' + target + '」を' + ope + 'します。よろしいですか?');
+        $('#modal_button2').text('キャンセル');
+        $('#modal_button').text(ope);
+
+        $('.mini.modal').modal({
+          detachable : false,
+          closable  : false,
+          inverted: true,
+          onDeny    : function(){},
+          onApprove : function() {
+            $.ajax({
+                url: server_url + '/' + url,
+                type:'POST',
+                contentType:"application/json; charset=utf-8",
+                dataType: 'json',
+                data : JSON.stringify(json),
+            }).done(function(data) {
+              if(mode == 2) {
+                // 編集モードの場合
+                $.ajax({
+                  url: server_url + '/read/book/' + $('#book_id').val()
+                }).done(function(res) {
+                  // 更新日時を最新化
+                  $('#book_update_date').val(res.book_update_date);
+                }).fail(function(XMLHttpRequest, textStatus, errorThrown) {});
+              }
+              success(ope);
+            }).fail(function(XMLHttpRequest, textStatus, errorThrown) {
+              setError(XMLHttpRequest, textStatus, errorThrown);
+            });
+          }
+        })
+        .modal('show');
+      }
+
+      // 削除ボタン押下時の処理
+      function del(id) {
+
+        // 選択項目の取得
+        var obj= getRowData(id);
+        // DELETE POST
+        postRequest(3, '削除', 'delete', obj['book_name'], {id : id, update_date : obj.book_update_date});
       }
 
       // 一覧データ取得
@@ -49,15 +166,15 @@
             .append('<td>' + obj.sale_date + '</td>')
             .append('<td>' + obj.isbn + '</td>')
             .append('<td>' + obj.book_note + '</td>')
-            .append('<td><i class="black edit icon"></i></td>')
-            .append('<td><i class="red times circle icon"></i></td>')
+            .append('<td onclick="edit(\'' + obj.book_id  + '\');"><i class="black edit icon"></i></td>')
+            .append('<td onclick="del(\'' + obj.book_id + '\');"><i class="red times circle icon"></i></td>')
             .append('</tr>');
           $('tbody').append(contents);
         });
-        table_obj = res.book_info;
+        table_obj = res;
       }
 
-      function setIncrementalSearch(area, box){
+      function setIncrementalSearch(area, box, type){
 
         // ヘッダの検索ボックス
 
@@ -108,55 +225,407 @@
 
         // 検索のサブスクライブ
         searchStream.subscribe(function(res) {
-          // テーブル
-          setTable(res);
+          if(type === 1){
+            // テーブル
+            setTable(res);
+          } else {
+            //
+          }
+        });
+      }
+
+      // 必須チェック
+      function requireCheck(item, name) {
+        let field = item + '_field';
+        let value = $(item).val();
+
+        if(value === '') {
+          // エラー
+          $(field).addClass('field error');
+          $(item).popup({content : name + 'を入力してください'});
+          $(item).popup('show');
+          return false;
+        }
+        // OK
+        $(field).removeClass('error');
+        $(item).popup({popup:false});
+        $(item).popup('hide');
+      }
+
+      function leaveOnlyNumber(e){
+        // 数字以外の不要な文字を削除
+        var st = String.fromCharCode(e.which);
+        if ("0123456789".indexOf(st,0) < 0) { return false; }
+        return true;
+      }
+
+      // 完了処理
+      function success(ope) {
+
+        // 処理後の検索
+        searchList('/read/' + encodeURIComponent($('#search_box').val()));
+
+        var color;
+        switch(ope){
+          case '登録':
+            color = 'violet'
+            break;
+          case '更新':
+            color = 'orange'
+            break;
+          case '削除':
+            color = 'pink'
+            break;
+          default:
+        }
+
+        $('body')
+          .toast({
+          title: 'Completed',
+          message: ope + 'が完了しました',
+          displayTime: 5000,
+          showIcon: 'check',
+          class : color,
+          className: {
+            toast: 'ui message'
+          }
+        });
+      }
+
+      // エラー処理
+      function setError(XMLHttpRequest, textStatus, errorThrown) {
+
+        if(XMLHttpRequest.status === 400){
+          var errors = JSON.parse(XMLHttpRequest.responseText)._embedded.errors;
+          errors.forEach(function(obj) {
+
+            var messages = obj.message.split(':')
+
+            var message = '';
+            if (messages.length > 1) {
+              message = messages[1];
+            } else {
+              message = obj.message;
+            }
+            $('body')
+              .toast({
+              title: 'Error',
+              icon : 'window close outline',
+              message: message,
+              displayTime: 5000,
+              class : 'red',
+              className: {
+                toast: 'ui message'
+              }
+            });
+          });
+        } else {
+          $('body')
+            .toast({
+            title: 'Error',
+            icon : 'window close outline',
+            message: textStatus,
+            displayTime: 5000,
+            class : 'red',
+            className: {
+              toast: 'ui message'
+            }
+          });
+        }
+      }
+
+      // 書籍登録ボタン押下時の処理
+      function create(id) {
+        if(!right_area) {
+          // 編集エリアが開いていない場合は開く
+          toggleArea();
+        }
+        if (mode === 2) {
+          $('#input_area').transition('horizontal flip', function() {
+
+            // セグメントの色
+            $('#input_segment').removeClass('yellow');
+            $('#input_segment').addClass('blue');
+
+
+            // タイトルとアイコン
+            $('#input_title').empty();
+            $('#input_title').append('<i class="plus square outline icon"></i>書籍を登録する');
+
+            // ボタン
+            $('#button1').text('登録');
+            $('#button1').removeClass('yellow');
+            $('#button1').addClass('blue');
+            $('#button2').text('クリア');
+
+            // フォームの入力内容を復元する
+            setCreateForm();
+
+            $('#input_area').transition('horizontal flip');
+          });
+          mode = 1;
+          $('#create').hide();
+        }
+      }
+
+      // 編集ボタン押下時の処理
+      function edit(id) {
+        if(!right_area) {
+          // 編集エリアが開いていない場合は開く
+          toggleArea();
+        }
+        if (mode === 1) {
+          // 編集
+          $('#input_area').transition('horizontal flip', function() {
+
+            // セグメントの色
+            $('#input_segment').removeClass('blue');
+            $('#input_segment').addClass('yellow');
+
+            // タイトルとアイコン
+            $('#input_title').empty();
+            $('#input_title').append('<i class="edit icon"></i>書籍を編集する');
+
+            // ボタン
+            $('#button1').text('更新');
+            $('#button1').removeClass('blue');
+            $('#button1').addClass('yellow');
+            $('#button2').text('戻す');
+
+            // 登録フォームの内容を保存
+            saveCreateForm();
+
+            // フォームに値を設定する
+            setEditForm(id)
+
+            $('#input_area').transition('horizontal flip');
+          });
+
+          mode = 2;
+          $('#create').show();
+        } else {
+            // フォームに値を設定する
+            setEditForm(id)
+        }
+      }
+
+      function setEditForm(id) {
+        // テーブルからフォームへ値の設定
+        var obj = getRowData(id);
+        Object.keys(obj).forEach(function(item) {
+          $('#' + item).val(obj[item]);
+        });
+      }
+
+      // 表示・非表示切り替え処理
+      function toggleArea() {
+        if(right_area) {
+          // 非表示
+          $('#input_area').transition('fly left',
+            function(){
+              $('#grid_area').removeClass('grid');
+            }
+          );
+          $('#toggle_link').text('書籍を登録／編集する');
+          right_area = false;
+        } else {
+          // 表示
+          $('#grid_area').addClass('grid');
+          $('#input_area').transition('fly left');
+          $('#toggle_link').text('一覧のみ表示する');
+          right_area = true;
+        }
+      }
+
+      // クリア／戻すボタン押下処理
+      function preClear() {
+        if(mode===2) {
+          setEditForm($('#book_id').val());
+          return false;
+        }
+        return true;
+      }
+
+      function getRowData(id) {
+        // 行の取得
+        var form = {}
+        var obj = table_obj.find(obj => obj.book_id == id);
+        form['book_id'] = obj.book_id;
+        form['book_name'] = obj.book_name;
+        form['page'] = obj.page;
+        form['publisher'] = obj.publisher;
+        form['isbn'] = obj.isbn;
+        form['sale_date'] = obj.sale_date;
+        form['book_note'] = obj.book_note;
+        form['author_name'] = obj.author_name;
+        form['author_note'] = obj.author_note;
+        form['book_update_date'] = obj.book_update_date;
+        form['author_update_date'] = obj.author_update_date;
+        return form;
+      }
+
+      // 書籍を登録するフォーム欄保存処理
+      function saveCreateForm() {
+        form_items.forEach(function(item) {
+          create_form[item] = $('#' + item).val();
+        });
+      }
+
+      // 書籍を登録するフォーム欄復元処理
+      function setCreateForm() {
+        Object.keys(create_form).forEach(function(item) {
+          $('#' + item).val(create_form[item]);
         });
       }
     </script>
   </head>
   <body>
     <div class="ui inverted menu">
-      <a href="." class="header item">
-        <i class="book icon"></i>書籍管理
-      </a>
-      <div class="ui labeled input">
-        <div id="search_area" class="ui search">
-          <div class="ui icon input">
-            <input id="search_box" class="prompt" type="text" placeholder="著者">
-            <i class="search icon"></i>
+        <a href="." class="header item">
+          <i class="book icon"></i>書籍管理
+        </a>
+        <div class="ui labeled input">
+          <div id="search_area" class="ui search">
+            <div class="ui icon input">
+              <input id="search_box" class="prompt" type="text" placeholder="著者名">
+              <i class="search icon"></i>
+            </div>
+            <div class="results"></div>
           </div>
-          <div class="results"></div>
         </div>
+      <div class="ui right inverted menu">
+        <a id="create" class="ui violet item active" onclick="create();">新規登録</a>
+        <a id="toggle_link" class="ui green item active" onclick="toggleArea();">書籍を登録／編集する</a>
+        <a id="sync" class="ui olive item active" onclick="searchList('/read/' + encodeURIComponent($('#search_box').val()));"><i class="sync icon"></i></a>
       </div>
     </div>
     <div class="header_space"></div>
 
-    <div id="list_area" class="column">
-      <div class="ui green segment">
-        <h4 class="ui horizontal left aligned divider header">
-          <i class="table icon"></i>書籍一覧
-        </h4>
-        <!-- 書籍一覧 -->
-        <table class="ui small compact celled striped table">
-          <thead>
-            <tr>
-              <th class="table_no">No.</th>
-              <th>書籍名</th>
-              <th>著者</th>
-              <th class="table_page">ページ数</th>
-              <th>出版社</th>
-              <th>発売日</th>
-              <th>ISBN</th>
-              <th>備考</th>
-              <th class="table_icon">編集</th>
-              <th class="table_icon">削除</th>
-            </tr>
-          </thead>
-          <tbody>
-          </tbody>
-          <tfoot id="pager_area"></tfoot>
-        </table>
+    <div id="grid_area" class="ui equal width">
+      <div class="row">
+        <div id="list_area" class="column">
+          <div class="ui green segment">
+            <h4 class="ui horizontal left aligned divider header">
+              <i class="table icon"></i>書籍一覧
+            </h4>
+            <!-- 書籍一覧 -->
+            <table class="ui small compact celled striped table">
+              <thead>
+                <tr>
+                  <th class="table_no">No.</th>
+                  <th>書籍名</th>
+                  <th>著者</th>
+                  <th class="table_page">ページ数</th>
+                  <th>出版社</th>
+                  <th>発売日</th>
+                  <th>ISBN</th>
+                  <th>備考</th>
+                  <th class="table_icon">編集</th>
+                  <th class="table_icon">削除</th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div id="input_area" class="column" align="left">
+
+          <div id="input_segment" class="ui blue segment">
+            <h4 id="input_title" class="ui horizontal left aligned divider header">
+              <i class="plus square outline icon"></i>書籍を登録する
+            </h4>
+            <form class="ui form success" method="post" onreset="return preClear();">
+              <div class="inline fields">
+                <div class="two wide required field">
+                  <label>書籍名</label>
+                </div>
+                <div id="book_name_field" class="fourteen wide field">
+                  <input id="book_name" name="book_name" type="text" maxlength="255" onblur="requireCheck('#book_name', '書籍名');" placeholder="書籍名">
+                </div>
+              </div>
+              <div class="inline fields">
+                <div class="two wide field">
+                  <label>出版社</label>
+                </div>
+                <div class="four wide field">
+                  <input id="publisher" name="publisher" type="text" maxlength="255" placeholder="出版社">
+                </div>
+                  <label>ISBN</label>
+                <div class="four wide field">
+                  <input id="isbn" name="isbn" type="tel" size="13" maxlength="13" placeholder="ISBN">
+                </div>
+                <label>ページ数</label>
+                <div class="three wide field">
+                  <input id="page" name="page" type="tel" size="4" maxlength="4" placeholder="ページ数">
+                </div>
+              </div>
+              <div class="inline fields">
+                <div class="two wide field">
+                <label>発売日</label>
+                </div>
+                <div class="ui calendar">
+                  <div class="ui input left icon">
+                    <i class="calendar icon"></i>
+                    <input id="sale_date" name="sale_date" size="10" maxlength="10" type="tel" placeholder="発売日">
+                  </div>
+                </div>
+              </div>
+              <div class="inline fields">
+                <div class="two wide field">
+                  <label>備考</label>
+                </div>
+                <div class="fourteen wide field">
+                <textarea rows="2" id="book_note" name="book_note" maxlength="1000" placeholder="備考"></textarea>
+                </div>
+              </div>
+              <div class="ui divider"></div>
+              <div class="inline fields">
+                <div class="two wide required field">
+                  <label>著者</label>
+                </div>
+                  <div id="author_name_field" class="five wide field ui search">
+                  <div class="ui icon input">
+                  <input  id="author_name" name="author_name" class="prompt" type="text" maxlength="255" onblur="requireCheck('#author_name', '著者');" placeholder="著者">
+                    <i class="search icon"></i>
+                  </div>
+                  <div class="results"></div>
+                </div>
+                <label>詳細</label>
+                <div class="eight wide field">
+                  <textarea rows="2" id="author_note" name="author_note" maxlength="1000" placeholder="備考"></textarea>
+                </div>
+              </div>
+              <div class="ui divider"></div>
+              <button id="button1" class="ui blue button" type="submit">
+                登録
+              </button>
+              <button id="button2" class="ui button" type="reset">
+                クリア
+              </button>
+              <input id="book_id" type="hidden" />
+              <input id="book_update_date" type="hidden" />
+              <input id="author_update_date" type="hidden" />
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   </body>
+  <!-- モーダルウィンドウ -->
+  <div class="ui mini modal">
+    <div id="modal_title" class="header">
+    </div>
+    <div class="content">
+      <p id="modal_message"></p>
+    </div>
+    <div class="actions">
+      <div id="modal_button2" class="ui negative button">
+        No
+      </div>
+      <div id="modal_button" class="ui positive button">
+        Yes
+      </div>
+    </div>
+  </div>
 </html>
