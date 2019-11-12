@@ -1,0 +1,23 @@
+table {
+  table-layout: fixed;
+  word-break: break-all;
+  word-wrap: break-word;
+}
+
+.page {
+ ime-mode: inactive;
+}
+
+.isbn {
+ ime-mode: inactive;
+}
+
+.table_icon {
+  width:35px;
+}
+#pager_area tr th{
+  background-color: white;
+}
+a.item.now_page {
+  background-color: #f5f5f5 !important;
+}

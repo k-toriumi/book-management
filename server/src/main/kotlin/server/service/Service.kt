@@ -41,17 +41,24 @@ class Service(var dbManager: DbManager) {
     /**
      * 書籍情報取得処理
      *
+     * @param displayPage 表示するページ
      * @param authorName 筆者
      *
      * @return 書籍情報
      */
-    fun read(authorName: String?): String {
+    fun read(displayPage: Int, authorName: String?): String {
+        var totalCount = dbManager.selectCount(authorName ?: "")
 
         var bookInfo = when (authorName) {
-            null -> dbManager.select(1, null, null)
-            else -> dbManager.select(2, authorName, null)
+            null -> dbManager.select(1, displayPage, null, null)
+            else -> dbManager.select(2, displayPage, authorName, null)
         }
-        return ObjectMapper().writeValueAsString(bookInfo)
+        return ObjectMapper().writeValueAsString(
+                object {
+                    var total_count = totalCount
+                    var book_info = if (totalCount > 0) bookInfo else ArrayList<BookInfo>()
+                }
+        )
     }
 
     /**
@@ -62,7 +69,7 @@ class Service(var dbManager: DbManager) {
      * @return 書籍情報
      */
     fun read(id: Int): String {
-        var bookList = dbManager.select(3, null, id)
+        var bookList = dbManager.select(3, null, null, id)
 
         if (bookList.isEmpty()) {
             return "{}"
@@ -95,7 +102,7 @@ class Service(var dbManager: DbManager) {
         var author = Author(toInt(bookInfo.author_id), bookInfo.author_name, bookInfo.author_note, toLocalDateTime(bookInfo.author_update_date))
 
         // 変更前の書籍情報を取得する
-        var bookList = dbManager.select(3, null, book.id)
+        var bookList = dbManager.select(3, null, null, book.id)
         if (bookList.isEmpty()) {
             return getErrorJsonMessage("該当の書籍は他のユーザによって変更されました。<br>最新の情報を確認してください")
         }
@@ -124,7 +131,7 @@ class Service(var dbManager: DbManager) {
      * @return エラーメッセージ
      */
     fun delete(id: String, update_date: String): String {
-        var bookList = dbManager.select(3, null, toInt(id))
+        var bookList = dbManager.select(3, null, null, toInt(id))
         if (bookList.isEmpty()) {
             return getErrorJsonMessage("該当の書籍は他のユーザによって削除されました。<br>最新の情報を確認してください")
         }
@@ -138,7 +145,7 @@ class Service(var dbManager: DbManager) {
         return ""
     }
 
-
+    
     /**
      * String → Int 変換処理
      *

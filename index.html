@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.7.8/dist/semantic.min.css">
     <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.7.8/dist/semantic.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/2.3.22/rx.lite.js"></script>
+    <link href="./css/style.css" rel="stylesheet" />
     <script>
 
       // サーバURL
@@ -22,6 +23,12 @@
       // 一覧データ
       var table_obj = [];
 
+      // 現在の表示ページ
+      var now_page = 1;
+
+      // 総件数
+      var total_count = 0;
+
       // 新規登録入力フォーム保存
       var create_form = {};
 
@@ -34,6 +41,9 @@
 
         // 新規登録ボタン非表示
         $('#create').hide();
+
+        // ページャエリア非表示
+        $('#pager_area').hide();
 
         // ISBNテキストボックスの設定
         $('#isbn').on("keypress", function(event){return leaveOnlyNumber(event);});
@@ -64,10 +74,20 @@
         setIncrementalSearch('#author_name_field', '#author_name', 2);
 
         // 初回検索
-        searchList('/read');
+        searchList('/read/1');
 
         // submit()に関数をバインド
         $('form').submit(function() {
+
+          // チェック処理
+          var error = check();
+
+          if (error) {
+            // エラーメッセージ領域表示
+            $('#message_title').
+            $('#message_area').show();
+            return false;
+          }
 
           var json = {
                 book_id : $('#book_id').val(),
@@ -143,37 +163,6 @@
         postRequest(3, '削除', 'delete', obj['book_name'], {id : id, update_date : obj.book_update_date});
       }
 
-      // 一覧データ取得
-      function searchList(url){
-        $.ajax({
-          url: server_url + url
-        }).done(function(res) {
-          setTable(res);
-        }).fail(function(XMLHttpRequest, textStatus, errorThrown) {
-        });
-      }
-
-      // テーブル設定処理
-      function setTable(res) {
-        $('tbody').empty();
-        res.forEach(function(obj) {
-          var contents = $('<tr>')
-            .append('<td>' + obj.no +'</td>')
-            .append('<td>' + obj.book_name + '</td>')
-            .append('<td>' + obj.author_name + '</td>')
-            .append('<td>' + obj.page + '</td>')
-            .append('<td>' + obj.publisher + '</td>')
-            .append('<td>' + obj.sale_date + '</td>')
-            .append('<td>' + obj.isbn + '</td>')
-            .append('<td>' + obj.book_note + '</td>')
-            .append('<td onclick="edit(\'' + obj.book_id  + '\');"><i class="black edit icon"></i></td>')
-            .append('<td onclick="del(\'' + obj.book_id + '\');"><i class="red times circle icon"></i></td>')
-            .append('</tr>');
-          $('tbody').append(contents);
-        });
-        table_obj = res;
-      }
-
       function setIncrementalSearch(area, box, type){
 
         // ヘッダの検索ボックス
@@ -197,7 +186,7 @@
           .throttle(300)
           .distinctUntilChanged()
           .map(function(query) {
-            return server_url + '/read/' + encodeURIComponent(query);
+            return server_url + '/read/' + now_page + '/' + encodeURIComponent(query);
         });
 
         // ローディングのストリーム
@@ -207,6 +196,9 @@
         var searchStream = urlStream
             .flatMap(function(query) {
                 loadingStream.onNext(true);
+                if(type === 1){
+                  now_page = 1;
+                }
                 return Rx.Observable.fromPromise($.ajax({url: query}))
                     .finally(function() { loadingStream.onNext(false); });
             })
@@ -228,10 +220,30 @@
           if(type === 1){
             // テーブル
             setTable(res);
+            // ページャ
+            setPager(res);
           } else {
             //
           }
         });
+      }
+
+      // 入力チェック
+      function check() {
+          var book_name = $('#book_name').val();
+          var page = $('#page').val();
+          var publisher = $('#publisher').val();
+          var isbn = $('#isbn').val();
+          var sale_date = $('#sale_date').val();
+          var book_note = $('#book_note').val();
+          var author_name = $('#author_name').val();
+          var author_note = $('#author_note').val();
+
+          // 書籍名
+          if(book_name === '') {
+            // 必須エラー
+            $('#message').text('書籍名を入力してください')
+          }
       }
 
       // 必須チェック
@@ -259,11 +271,90 @@
         return true;
       }
 
+      // テーブル設定処理
+      function setTable(res) {
+        $('tbody').empty();
+        if(res.total_count > 0){
+          res.book_info.forEach(function(obj) {
+            var contents = $('<tr>')
+              .append('<td>' + obj.no +'</td>')
+              .append('<td>' + obj.book_name + '</td>')
+              .append('<td>' + obj.author_name + '</td>')
+              .append('<td>' + obj.page + '</td>')
+              .append('<td>' + obj.publisher + '</td>')
+              .append('<td>' + obj.sale_date + '</td>')
+              .append('<td>' + obj.isbn + '</td>')
+              .append('<td>' + obj.book_note + '</td>')
+              .append('<td onclick="edit(\'' + obj.book_id  + '\');"><i class="black edit icon"></i></td>')
+              .append('<td onclick="del(\'' + obj.book_id + '\');"><i class="red times circle icon"></i></td>')
+              .append('</tr>');
+            $('tbody').append(contents);
+          });
+        }
+        table_obj = res.book_info;
+      }
+
+      // ページャ設定処理
+      function setPager(res) {
+        $('#pager').empty();
+
+        var total_count = res.total_count;
+        if(total_count > 0) {
+          var page_count = parseInt((total_count - 1) / 10) + 1;
+          if(now_page > 1){
+              $('#pager').append('<a class="icon item" onclick="clickPage(' + (now_page - 1) + ');"><i class="left chevron icon"></i></a>');
+          }
+
+          if(page_count === 1){
+            $('#pager').hide();
+          } else {
+            $('#pager').show();
+            for(var i=1; i <= page_count; i++) {
+                if (i === now_page) {
+                  $('#pager').append('<a class="item now_page" onclick="clickPage(' + i + ');">' + i + '</a>');
+                } else {
+                  $('#pager').append('<a class="item" onclick="clickPage(' + i + ');">' + i + '</a>');
+                }
+            }
+          }
+          if(page_count > now_page){
+            $('#pager').append('<a class="icon item" onclick="clickPage(' + (now_page + 1) + ');"><i class="right chevron icon"></i></a>');
+          }
+
+          let from = (now_page - 1) * 10 + 1;
+          let to = now_page * 10 > total_count ? total_count : now_page * 10;
+          $('#from_to_count').text(' ' + from + ' - ' + to);
+          $('#total_count').text('全' + total_count + '件');
+          $('#pager_area').show();
+        } else {
+          $('#pager_area').hide();
+        }
+      }
+
+      // ページ遷移
+      function clickPage(page){
+
+        now_page = page;
+        searchList('/read/' + now_page + '/' + encodeURIComponent($('#search_box').val()));
+      }
+
+      // 一覧データ取得
+      function searchList(url){
+        $.ajax({
+          url: server_url + url
+        }).done(function(res) {
+          setTable(res);
+          setPager(res);
+        }).fail(function(XMLHttpRequest, textStatus, errorThrown) {
+          setError(XMLHttpRequest, textStatus, errorThrown);
+        });
+      }
+
       // 完了処理
       function success(ope) {
 
         // 処理後の検索
-        searchList('/read/' + encodeURIComponent($('#search_box').val()));
+        searchList('/read/' + now_page + '/' + encodeURIComponent($('#search_box').val()));
 
         var color;
         switch(ope){
@@ -487,7 +578,7 @@
         <div class="ui labeled input">
           <div id="search_area" class="ui search">
             <div class="ui icon input">
-              <input id="search_box" class="prompt" type="text" placeholder="著者名">
+              <input id="search_box" class="prompt" type="text" placeholder="著者">
               <i class="search icon"></i>
             </div>
             <div class="results"></div>
@@ -496,7 +587,7 @@
       <div class="ui right inverted menu">
         <a id="create" class="ui violet item active" onclick="create();">新規登録</a>
         <a id="toggle_link" class="ui green item active" onclick="toggleArea();">書籍を登録／編集する</a>
-        <a id="sync" class="ui olive item active" onclick="searchList('/read/' + encodeURIComponent($('#search_box').val()));"><i class="sync icon"></i></a>
+        <a id="sync" class="ui olive item active" onclick="searchList('/read/' + now_page + '/' + encodeURIComponent($('#search_box').val()));"><i class="sync icon"></i></a>
       </div>
     </div>
     <div class="header_space"></div>
@@ -526,6 +617,18 @@
               </thead>
               <tbody>
               </tbody>
+              <tfoot id="pager_area">
+                <tr><th colspan="10">
+                  <div class="ui mini compact menu">
+                    <a id="from_to_count" class="item">
+                    </a>
+                    <a id="total_count" class="item">
+                    </a>
+                  </div>
+                  <div id="pager" class="ui right floated tiny pagination menu">
+                  </div>
+                </th>
+              </tr></tfoot>
             </table>
           </div>
         </div>
@@ -593,7 +696,7 @@
                 </div>
                 <label>詳細</label>
                 <div class="eight wide field">
-                  <textarea rows="2" id="author_note" name="author_note" maxlength="1000" placeholder="備考"></textarea>
+                  <textarea rows="2" id="author_note" name="author_note" maxlength="1000" placeholder="詳細"></textarea>
                 </div>
               </div>
               <div class="ui divider"></div>

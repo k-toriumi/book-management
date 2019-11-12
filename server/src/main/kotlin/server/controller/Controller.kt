@@ -37,17 +37,20 @@ class Controller(var dbManager: DbManager) {
         }
         return HttpResponse.ok("{}")
     }
+
     /**
      * 書籍情報取得処理
      *
+     * @param displayPage 表示するページ
      * @param authorName 筆者
      *
      * @return 書籍情報（JSON）
      */
-    @Get("/read{/authorName}")
-    fun read(authorName: String?): String {
-        return service.read(authorName)
+    @Get("/read/{displayPage}{/authorName}")
+    fun read(displayPage: Int, authorName: String?): String {
+        return service.read(displayPage, authorName)
     }
+
     /**
      * 書籍情報取得処理
      *
