@@ -298,15 +298,8 @@ class DbManager(var client: PgPool) {
     private fun selectAuthorForUpdate(tran: PgTransaction, author: Author): Boolean {
         return tran.rxPreparedQuery("SELECT * FROM author WHERE id = $1 FOR UPDATE NOWAIT", Tuple.of(author.id))
                 .map<Boolean> {
-                    var updateDate: LocalDateTime? = null
-                    val ite = it.iterator()
-                    while (ite.hasNext()) {
-                        val row = ite.next()
-                        updateDate = row.getLocalDateTime("update_date")
-                    }
                     // 更新日時を比較
-                    if (updateDate != null && updateDate.truncatedTo(ChronoUnit.MILLIS).isEqual(
-                                    author.update_date!!.truncatedTo(ChronoUnit.MILLIS))) {
+                    if (it.size() == 1) {
                         return@map true
                     }
                     return@map false

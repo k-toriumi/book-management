@@ -80,12 +80,13 @@ class Service(var dbManager: DbManager) {
     /**
      * 著者情報取得処理
      *
+     * @param complete '0':部分一致 '1':完全一致
      * @param authorName 著者
      *
      * @return 著者情報
      */
-    fun readAuthor(authorName: String): String {
-        var result = dbManager.selectAuthor(authorName, false)
+    fun readAuthor(complete: String, authorName: String): String {
+        var result = dbManager.selectAuthor(authorName, complete == "1")
         return ObjectMapper().writeValueAsString(result)
     }
 
