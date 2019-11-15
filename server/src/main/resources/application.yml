@@ -2,6 +2,13 @@
 micronaut:
   application:
     name: server
+  server:
+    cors:
+      enabled: true
+      configurations:
+        all:
+          allowedOrigins:
+            - https://k-toriumi.github.io
 
 ---
 postgres:
