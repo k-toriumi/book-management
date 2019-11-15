@@ -39,3 +39,7 @@ SELECT
 FROM book
 LEFT JOIN author
 ON book.author_id = author.id;
+
+CREATE INDEX idx_book ON book (author_id);
+
+CREATE INDEX idx_author ON author (name);

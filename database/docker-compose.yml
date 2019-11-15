@@ -1,0 +1,14 @@
+version: '3.1'
+services:
+  db:
+    image: postgres
+    restart: always
+    container_name: postgres
+    environment:
+      POSTGRES_USER:
+      POSTGRES_PASSWORD:
+      POSTGRES_DB: book_database
+    volumes:
+      - home/ec2-user/docker/volume:/docker-entrypoint-initdb.d
+    ports:
+      - 5432:5432
