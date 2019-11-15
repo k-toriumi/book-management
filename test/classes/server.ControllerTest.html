@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - Class server.ControllerTest</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>Class server.ControllerTest</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/server.html">server</a> &gt; ControllerTest</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">12</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">23.820s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard output</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">書籍の削除(/delete)のテスト</td>
+<td class="success">2.093s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">書籍の削除(/delete)の排他エラーのテスト</td>
+<td class="success">0.132s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">書籍の削除(/delete)の排他エラーのテスト２</td>
+<td class="success">0.059s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">書籍の取得(/read/book/{id})のテスト</td>
+<td class="success">3.525s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">書籍の取得(/read/{displayPage}{/authorName})のテスト</td>
+<td class="success">4.528s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">書籍の更新(/update)のテスト</td>
+<td class="success">2.180s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">書籍の更新(/update)の排他エラーのテスト</td>
+<td class="success">0.389s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">書籍の更新(/update)の排他エラーのテスト２</td>
+<td class="success">0.308s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">書籍の更新(/update)の重複エラーのテスト</td>
+<td class="success">0.251s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">書籍の登録(/create)のテスト</td>
+<td class="success">4.864s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">書籍の登録(/create)の重複チェックのテスト</td>
+<td class="success">2.032s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">著者の取得(/read/author/{complete}{authorName})のテスト</td>
+<td class="success">3.459s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>?[36m12:01:02.563?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /create, PARAM: {&quot;no&quot;:1,&quot;book_id&quot;:1,&quot;book_name&quot;:&quot;テスト書籍名&quot;,&quot;page&quot;:&quot;1234&quot;,&quot;publisher&quot;:&quot;テスト出版社&quot;,&quot;sale_date&quot;:&quot;2019/01/01&quot;,&quot;isbn&quot;:&quot;1234567890123&quot;,&quot;book_note&quot;:&quot;テスト備考＿書籍&quot;,&quot;author_name&quot;:&quot;テスト著者&quot;,&quot;author_note&quot;:&quot;テスト備考＿著者&quot;}
+?[36m12:01:02.730?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /delete, PARAM: {&quot;id&quot;:&quot;551&quot;,&quot;update_date&quot;:&quot;2019-11-15 03:01:02.675675760&quot;}
+?[36m12:01:02.776?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /create, PARAM: {&quot;no&quot;:1,&quot;book_id&quot;:1,&quot;book_name&quot;:&quot;テスト書籍名1&quot;,&quot;page&quot;:&quot;1234&quot;,&quot;publisher&quot;:&quot;テスト出版社&quot;,&quot;sale_date&quot;:&quot;2019/01/01&quot;,&quot;isbn&quot;:&quot;1234567890123&quot;,&quot;book_note&quot;:&quot;テスト備考＿書籍&quot;,&quot;author_name&quot;:&quot;テスト著者1&quot;,&quot;author_note&quot;:&quot;テスト備考＿著者&quot;}
+?[36m12:01:02.793?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /create, PARAM: {&quot;no&quot;:1,&quot;book_id&quot;:1,&quot;book_name&quot;:&quot;テスト書籍名2&quot;,&quot;page&quot;:&quot;1234&quot;,&quot;publisher&quot;:&quot;テスト出版社&quot;,&quot;sale_date&quot;:&quot;2019/01/01&quot;,&quot;isbn&quot;:&quot;1234567890123&quot;,&quot;book_note&quot;:&quot;テスト備考＿書籍&quot;,&quot;author_name&quot;:&quot;テスト著者2&quot;,&quot;author_note&quot;:&quot;テスト備考＿著者&quot;}
+?[36m12:01:02.809?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /create, PARAM: {&quot;no&quot;:1,&quot;book_id&quot;:1,&quot;book_name&quot;:&quot;テスト書籍名3&quot;,&quot;page&quot;:&quot;1234&quot;,&quot;publisher&quot;:&quot;テスト出版社&quot;,&quot;sale_date&quot;:&quot;2019/01/01&quot;,&quot;isbn&quot;:&quot;1234567890123&quot;,&quot;book_note&quot;:&quot;テスト備考＿書籍&quot;,&quot;author_name&quot;:&quot;テスト著者3&quot;,&quot;author_note&quot;:&quot;テスト備考＿著者&quot;}
+?[36m12:01:02.826?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /create, PARAM: {&quot;no&quot;:1,&quot;book_id&quot;:1,&quot;book_name&quot;:&quot;テスト書籍名4&quot;,&quot;page&quot;:&quot;1234&quot;,&quot;publisher&quot;:&quot;テスト出版社&quot;,&quot;sale_date&quot;:&quot;2019/01/01&quot;,&quot;isbn&quot;:&quot;1234567890123&quot;,&quot;book_note&quot;:&quot;テスト備考＿書籍&quot;,&quot;author_name&quot;:&quot;テスト著者4&quot;,&quot;author_note&quot;:&quot;テスト備考＿著者&quot;}
+?[36m12:01:02.846?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /create, PARAM: {&quot;no&quot;:1,&quot;book_id&quot;:1,&quot;book_name&quot;:&quot;テスト書籍名5&quot;,&quot;page&quot;:&quot;1234&quot;,&quot;publisher&quot;:&quot;テスト出版社&quot;,&quot;sale_date&quot;:&quot;2019/01/01&quot;,&quot;isbn&quot;:&quot;1234567890123&quot;,&quot;book_note&quot;:&quot;テスト備考＿書籍&quot;,&quot;author_name&quot;:&quot;テスト著者5&quot;,&quot;author_note&quot;:&quot;テスト備考＿著者&quot;}
+?[36m12:01:02.872?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /create, PARAM: {&quot;no&quot;:1,&quot;book_id&quot;:1,&quot;book_name&quot;:&quot;テスト書籍名6&quot;,&quot;page&quot;:&quot;1234&quot;,&quot;publisher&quot;:&quot;テスト出版社&quot;,&quot;sale_date&quot;:&quot;2019/01/01&quot;,&quot;isbn&quot;:&quot;1234567890123&quot;,&quot;book_note&quot;:&quot;テスト備考＿書籍&quot;,&quot;author_name&quot;:&quot;テスト著者6&quot;,&quot;author_note&quot;:&quot;テスト備考＿著者&quot;}
+?[36m12:01:02.889?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /create, PARAM: {&quot;no&quot;:1,&quot;book_id&quot;:1,&quot;book_name&quot;:&quot;テスト書籍名7&quot;,&quot;page&quot;:&quot;1234&quot;,&quot;publisher&quot;:&quot;テスト出版社&quot;,&quot;sale_date&quot;:&quot;2019/01/01&quot;,&quot;isbn&quot;:&quot;1234567890123&quot;,&quot;book_note&quot;:&quot;テスト備考＿書籍&quot;,&quot;author_name&quot;:&quot;テスト著者7&quot;,&quot;author_note&quot;:&quot;テスト備考＿著者&quot;}
+?[36m12:01:02.906?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /create, PARAM: {&quot;no&quot;:1,&quot;book_id&quot;:1,&quot;book_name&quot;:&quot;テスト書籍名8&quot;,&quot;page&quot;:&quot;1234&quot;,&quot;publisher&quot;:&quot;テスト出版社&quot;,&quot;sale_date&quot;:&quot;2019/01/01&quot;,&quot;isbn&quot;:&quot;1234567890123&quot;,&quot;book_note&quot;:&quot;テスト備考＿書籍&quot;,&quot;author_name&quot;:&quot;テスト著者8&quot;,&quot;author_note&quot;:&quot;テスト備考＿著者&quot;}
+?[36m12:01:02.923?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /create, PARAM: {&quot;no&quot;:1,&quot;book_id&quot;:1,&quot;book_name&quot;:&quot;テスト書籍名9&quot;,&quot;page&quot;:&quot;1234&quot;,&quot;publisher&quot;:&quot;テスト出版社&quot;,&quot;sale_date&quot;:&quot;2019/01/01&quot;,&quot;isbn&quot;:&quot;1234567890123&quot;,&quot;book_note&quot;:&quot;テスト備考＿書籍&quot;,&quot;author_name&quot;:&quot;テスト著者9&quot;,&quot;author_note&quot;:&quot;テスト備考＿著者&quot;}
+?[36m12:01:02.947?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /create, PARAM: {&quot;no&quot;:1,&quot;book_id&quot;:1,&quot;book_name&quot;:&quot;テスト書籍名10&quot;,&quot;page&quot;:&quot;1234&quot;,&quot;publisher&quot;:&quot;テスト出版社&quot;,&quot;sale_date&quot;:&quot;2019/01/01&quot;,&quot;isbn&quot;:&quot;1234567890123&quot;,&quot;book_note&quot;:&quot;テスト備考＿書籍&quot;,&quot;author_name&quot;:&quot;テスト著者10&quot;,&quot;author_note&quot;:&quot;テスト備考＿著者&quot;}
+?[36m12:01:02.964?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /create, PARAM: {&quot;no&quot;:1,&quot;book_id&quot;:1,&quot;book_name&quot;:&quot;テスト書籍名11&quot;,&quot;page&quot;:&quot;1234&quot;,&quot;publisher&quot;:&quot;テスト出版社&quot;,&quot;sale_date&quot;:&quot;2019/01/01&quot;,&quot;isbn&quot;:&quot;1234567890123&quot;,&quot;book_note&quot;:&quot;テスト備考＿書籍&quot;,&quot;author_name&quot;:&quot;テスト著者11&quot;,&quot;author_note&quot;:&quot;テスト備考＿著者&quot;}
+?[36m12:01:02.979?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /create, PARAM: {&quot;no&quot;:1,&quot;book_id&quot;:1,&quot;book_name&quot;:&quot;テスト書籍名12&quot;,&quot;page&quot;:&quot;1234&quot;,&quot;publisher&quot;:&quot;テスト出版社&quot;,&quot;sale_date&quot;:&quot;2019/01/01&quot;,&quot;isbn&quot;:&quot;1234567890123&quot;,&quot;book_note&quot;:&quot;テスト備考＿書籍&quot;,&quot;author_name&quot;:&quot;テスト著者12&quot;,&quot;author_note&quot;:&quot;テスト備考＿著者&quot;}
+?[36m12:01:02.995?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /create, PARAM: {&quot;no&quot;:1,&quot;book_id&quot;:1,&quot;book_name&quot;:&quot;テスト書籍名13&quot;,&quot;page&quot;:&quot;1234&quot;,&quot;publisher&quot;:&quot;テスト出版社&quot;,&quot;sale_date&quot;:&quot;2019/01/01&quot;,&quot;isbn&quot;:&quot;1234567890123&quot;,&quot;book_note&quot;:&quot;テスト備考＿書籍&quot;,&quot;author_name&quot;:&quot;テスト著者13&quot;,&quot;author_note&quot;:&quot;テスト備考＿著者&quot;}
+?[36m12:01:03.013?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /create, PARAM: {&quot;no&quot;:1,&quot;book_id&quot;:1,&quot;book_name&quot;:&quot;テスト書籍名14&quot;,&quot;page&quot;:&quot;1234&quot;,&quot;publisher&quot;:&quot;テスト出版社&quot;,&quot;sale_date&quot;:&quot;2019/01/01&quot;,&quot;isbn&quot;:&quot;1234567890123&quot;,&quot;book_note&quot;:&quot;テスト備考＿書籍&quot;,&quot;author_name&quot;:&quot;テスト著者14&quot;,&quot;author_note&quot;:&quot;テスト備考＿著者&quot;}
+?[36m12:01:03.032?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /create, PARAM: {&quot;no&quot;:1,&quot;book_id&quot;:1,&quot;book_name&quot;:&quot;テスト書籍名15&quot;,&quot;page&quot;:&quot;1234&quot;,&quot;publisher&quot;:&quot;テスト出版社&quot;,&quot;sale_date&quot;:&quot;2019/01/01&quot;,&quot;isbn&quot;:&quot;1234567890123&quot;,&quot;book_note&quot;:&quot;テスト備考＿書籍&quot;,&quot;author_name&quot;:&quot;テスト著者15&quot;,&quot;author_note&quot;:&quot;テスト備考＿著者&quot;}
+?[36m12:01:03.049?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /create, PARAM: {&quot;no&quot;:1,&quot;book_id&quot;:1,&quot;book_name&quot;:&quot;テスト書籍名16&quot;,&quot;page&quot;:&quot;1234&quot;,&quot;publisher&quot;:&quot;テスト出版社&quot;,&quot;sale_date&quot;:&quot;2019/01/01&quot;,&quot;isbn&quot;:&quot;1234567890123&quot;,&quot;book_note&quot;:&quot;テスト備考＿書籍&quot;,&quot;author_name&quot;:&quot;テスト著者16&quot;,&quot;author_note&quot;:&quot;テスト備考＿著者&quot;}
+?[36m12:01:03.080?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /create, PARAM: {&quot;no&quot;:1,&quot;book_id&quot;:1,&quot;book_name&quot;:&quot;テスト書籍名17&quot;,&quot;page&quot;:&quot;1234&quot;,&quot;publisher&quot;:&quot;テスト出版社&quot;,&quot;sale_date&quot;:&quot;2019/01/01&quot;,&quot;isbn&quot;:&quot;1234567890123&quot;,&quot;book_note&quot;:&quot;テスト備考＿書籍&quot;,&quot;author_name&quot;:&quot;テスト著者17&quot;,&quot;author_note&quot;:&quot;テスト備考＿著者&quot;}
+?[36m12:01:03.095?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /create, PARAM: {&quot;no&quot;:1,&quot;book_id&quot;:1,&quot;book_name&quot;:&quot;テスト書籍名18&quot;,&quot;page&quot;:&quot;1234&quot;,&quot;publisher&quot;:&quot;テスト出版社&quot;,&quot;sale_date&quot;:&quot;2019/01/01&quot;,&quot;isbn&quot;:&quot;1234567890123&quot;,&quot;book_note&quot;:&quot;テスト備考＿書籍&quot;,&quot;author_name&quot;:&quot;テスト著者18&quot;,&quot;author_note&quot;:&quot;テスト備考＿著者&quot;}
+?[36m12:01:03.107?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /create, PARAM: {&quot;no&quot;:1,&quot;book_id&quot;:1,&quot;book_name&quot;:&quot;テスト書籍名19&quot;,&quot;page&quot;:&quot;1234&quot;,&quot;publisher&quot;:&quot;テスト出版社&quot;,&quot;sale_date&quot;:&quot;2019/01/01&quot;,&quot;isbn&quot;:&quot;1234567890123&quot;,&quot;book_note&quot;:&quot;テスト備考＿書籍&quot;,&quot;author_name&quot;:&quot;テスト著者19&quot;,&quot;author_note&quot;:&quot;テスト備考＿著者&quot;}
+?[36m12:01:03.119?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /create, PARAM: {&quot;no&quot;:1,&quot;book_id&quot;:1,&quot;book_name&quot;:&quot;テスト書籍名20&quot;,&quot;page&quot;:&quot;1234&quot;,&quot;publisher&quot;:&quot;テスト出版社&quot;,&quot;sale_date&quot;:&quot;2019/01/01&quot;,&quot;isbn&quot;:&quot;1234567890123&quot;,&quot;book_note&quot;:&quot;テスト備考＿書籍&quot;,&quot;author_name&quot;:&quot;テスト著者20&quot;,&quot;author_note&quot;:&quot;テスト備考＿著者&quot;}
+?[36m12:01:03.138?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /create, PARAM: {&quot;no&quot;:1,&quot;book_id&quot;:1,&quot;book_name&quot;:&quot;テスト書籍名21&quot;,&quot;page&quot;:&quot;1234&quot;,&quot;publisher&quot;:&quot;テスト出版社&quot;,&quot;sale_date&quot;:&quot;2019/01/01&quot;,&quot;isbn&quot;:&quot;1234567890123&quot;,&quot;book_note&quot;:&quot;テスト備考＿書籍&quot;,&quot;author_name&quot;:&quot;テスト著者21&quot;,&quot;author_note&quot;:&quot;テスト備考＿著者&quot;}
+?[36m12:01:03.150?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /create, PARAM: {&quot;no&quot;:1,&quot;book_id&quot;:1,&quot;book_name&quot;:&quot;テスト書籍名22&quot;,&quot;page&quot;:&quot;1234&quot;,&quot;publisher&quot;:&quot;テスト出版社&quot;,&quot;sale_date&quot;:&quot;2019/01/01&quot;,&quot;isbn&quot;:&quot;1234567890123&quot;,&quot;book_note&quot;:&quot;テスト備考＿書籍&quot;,&quot;author_name&quot;:&quot;テスト著者22&quot;,&quot;author_note&quot;:&quot;テスト備考＿著者&quot;}
+?[36m12:01:03.163?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /create, PARAM: {&quot;no&quot;:1,&quot;book_id&quot;:1,&quot;book_name&quot;:&quot;テスト書籍名23&quot;,&quot;page&quot;:&quot;1234&quot;,&quot;publisher&quot;:&quot;テスト出版社&quot;,&quot;sale_date&quot;:&quot;2019/01/01&quot;,&quot;isbn&quot;:&quot;1234567890123&quot;,&quot;book_note&quot;:&quot;テスト備考＿書籍&quot;,&quot;author_name&quot;:&quot;テスト著者23&quot;,&quot;author_note&quot;:&quot;テスト備考＿著者&quot;}
+?[36m12:01:03.201?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /create, PARAM: {&quot;no&quot;:1,&quot;book_id&quot;:1,&quot;book_name&quot;:&quot;テスト書籍名24&quot;,&quot;page&quot;:&quot;1234&quot;,&quot;publisher&quot;:&quot;テスト出版社&quot;,&quot;sale_date&quot;:&quot;2019/01/01&quot;,&quot;isbn&quot;:&quot;1234567890123&quot;,&quot;book_note&quot;:&quot;テスト備考＿書籍&quot;,&quot;author_name&quot;:&quot;テスト著者24&quot;,&quot;author_note&quot;:&quot;テスト備考＿著者&quot;}
+?[36m12:01:03.215?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /create, PARAM: {&quot;no&quot;:1,&quot;book_id&quot;:1,&quot;book_name&quot;:&quot;テスト書籍名25&quot;,&quot;page&quot;:&quot;1234&quot;,&quot;publisher&quot;:&quot;テスト出版社&quot;,&quot;sale_date&quot;:&quot;2019/01/01&quot;,&quot;isbn&quot;:&quot;1234567890123&quot;,&quot;book_note&quot;:&quot;テスト備考＿書籍&quot;,&quot;author_name&quot;:&quot;テスト著者25&quot;,&quot;author_note&quot;:&quot;テスト備考＿著者&quot;}
+?[36m12:01:03.226?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /create, PARAM: {&quot;no&quot;:1,&quot;book_id&quot;:1,&quot;book_name&quot;:&quot;テスト書籍名26&quot;,&quot;page&quot;:&quot;1234&quot;,&quot;publisher&quot;:&quot;テスト出版社&quot;,&quot;sale_date&quot;:&quot;2019/01/01&quot;,&quot;isbn&quot;:&quot;1234567890123&quot;,&quot;book_note&quot;:&quot;テスト備考＿書籍&quot;,&quot;author_name&quot;:&quot;テスト著者26&quot;,&quot;author_note&quot;:&quot;テスト備考＿著者&quot;}
+?[36m12:01:03.236?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /create, PARAM: {&quot;no&quot;:1,&quot;book_id&quot;:1,&quot;book_name&quot;:&quot;テスト書籍名27&quot;,&quot;page&quot;:&quot;1234&quot;,&quot;publisher&quot;:&quot;テスト出版社&quot;,&quot;sale_date&quot;:&quot;2019/01/01&quot;,&quot;isbn&quot;:&quot;1234567890123&quot;,&quot;book_note&quot;:&quot;テスト備考＿書籍&quot;,&quot;author_name&quot;:&quot;テスト著者27&quot;,&quot;author_note&quot;:&quot;テスト備考＿著者&quot;}
+?[36m12:01:03.249?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /create, PARAM: {&quot;no&quot;:1,&quot;book_id&quot;:1,&quot;book_name&quot;:&quot;テスト書籍名28&quot;,&quot;page&quot;:&quot;1234&quot;,&quot;publisher&quot;:&quot;テスト出版社&quot;,&quot;sale_date&quot;:&quot;2019/01/01&quot;,&quot;isbn&quot;:&quot;1234567890123&quot;,&quot;book_note&quot;:&quot;テスト備考＿書籍&quot;,&quot;author_name&quot;:&quot;テスト著者28&quot;,&quot;author_note&quot;:&quot;テスト備考＿著者&quot;}
+?[36m12:01:03.260?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /create, PARAM: {&quot;no&quot;:1,&quot;book_id&quot;:1,&quot;book_name&quot;:&quot;テスト書籍名29&quot;,&quot;page&quot;:&quot;1234&quot;,&quot;publisher&quot;:&quot;テスト出版社&quot;,&quot;sale_date&quot;:&quot;2019/01/01&quot;,&quot;isbn&quot;:&quot;1234567890123&quot;,&quot;book_note&quot;:&quot;テスト備考＿書籍&quot;,&quot;author_name&quot;:&quot;テスト著者29&quot;,&quot;author_note&quot;:&quot;テスト備考＿著者&quot;}
+?[36m12:01:03.269?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /create, PARAM: {&quot;no&quot;:1,&quot;book_id&quot;:1,&quot;book_name&quot;:&quot;テスト書籍名30&quot;,&quot;page&quot;:&quot;1234&quot;,&quot;publisher&quot;:&quot;テスト出版社&quot;,&quot;sale_date&quot;:&quot;2019/01/01&quot;,&quot;isbn&quot;:&quot;1234567890123&quot;,&quot;book_note&quot;:&quot;テスト備考＿書籍&quot;,&quot;author_name&quot;:&quot;テスト著者30&quot;,&quot;author_note&quot;:&quot;テスト備考＿著者&quot;}
+?[36m12:01:03.328?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /delete, PARAM: {&quot;id&quot;:&quot;552&quot;,&quot;update_date&quot;:&quot;2019-11-15 03:01:02.791791373&quot;}
+?[36m12:01:03.340?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /delete, PARAM: {&quot;id&quot;:&quot;553&quot;,&quot;update_date&quot;:&quot;2019-11-15 03:01:02.805805991&quot;}
+?[36m12:01:03.351?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /delete, PARAM: {&quot;id&quot;:&quot;554&quot;,&quot;update_date&quot;:&quot;2019-11-15 03:01:02.821821350&quot;}
+?[36m12:01:03.360?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /delete, PARAM: {&quot;id&quot;:&quot;555&quot;,&quot;update_date&quot;:&quot;2019-11-15 03:01:02.839839116&quot;}
+?[36m12:01:03.377?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /delete, PARAM: {&quot;id&quot;:&quot;556&quot;,&quot;update_date&quot;:&quot;2019-11-15 03:01:02.858858477&quot;}
+?[36m12:01:03.387?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /delete, PARAM: {&quot;id&quot;:&quot;557&quot;,&quot;update_date&quot;:&quot;2019-11-15 03:01:02.885885198&quot;}
+?[36m12:01:03.399?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /delete, PARAM: {&quot;id&quot;:&quot;558&quot;,&quot;update_date&quot;:&quot;2019-11-15 03:01:02.901901582&quot;}
+?[36m12:01:03.409?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /delete, PARAM: {&quot;id&quot;:&quot;559&quot;,&quot;update_date&quot;:&quot;2019-11-15 03:01:02.919919360&quot;}
+?[36m12:01:03.421?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /delete, PARAM: {&quot;id&quot;:&quot;560&quot;,&quot;update_date&quot;:&quot;2019-11-15 03:01:02.935935701&quot;}
+?[36m12:01:03.431?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /delete, PARAM: {&quot;id&quot;:&quot;561&quot;,&quot;update_date&quot;:&quot;2019-11-15 03:01:02.960960211&quot;}
+?[36m12:01:03.451?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /delete, PARAM: {&quot;id&quot;:&quot;562&quot;,&quot;update_date&quot;:&quot;2019-11-15 03:01:02.975975823&quot;}
+?[36m12:01:03.466?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /delete, PARAM: {&quot;id&quot;:&quot;563&quot;,&quot;update_date&quot;:&quot;2019-11-15 03:01:02.994994025&quot;}
+?[36m12:01:03.492?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /delete, PARAM: {&quot;id&quot;:&quot;564&quot;,&quot;update_date&quot;:&quot;2019-11-15 03:01:03.012012466&quot;}
+?[36m12:01:03.504?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /delete, PARAM: {&quot;id&quot;:&quot;565&quot;,&quot;update_date&quot;:&quot;2019-11-15 03:01:03.032032470&quot;}
+?[36m12:01:03.513?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /delete, PARAM: {&quot;id&quot;:&quot;566&quot;,&quot;update_date&quot;:&quot;2019-11-15 03:01:03.048048264&quot;}
+?[36m12:01:03.524?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /delete, PARAM: {&quot;id&quot;:&quot;567&quot;,&quot;update_date&quot;:&quot;2019-11-15 03:01:03.072072635&quot;}
+?[36m12:01:03.550?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /delete, PARAM: {&quot;id&quot;:&quot;568&quot;,&quot;update_date&quot;:&quot;2019-11-15 03:01:03.092092373&quot;}
+?[36m12:01:03.561?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /delete, PARAM: {&quot;id&quot;:&quot;569&quot;,&quot;update_date&quot;:&quot;2019-11-15 03:01:03.107107013&quot;}
+?[36m12:01:03.578?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /delete, PARAM: {&quot;id&quot;:&quot;570&quot;,&quot;update_date&quot;:&quot;2019-11-15 03:01:03.119119092&quot;}
+?[36m12:01:03.598?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /delete, PARAM: {&quot;id&quot;:&quot;571&quot;,&quot;update_date&quot;:&quot;2019-11-15 03:01:03.135135561&quot;}
+?[36m12:01:03.624?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /delete, PARAM: {&quot;id&quot;:&quot;572&quot;,&quot;update_date&quot;:&quot;2019-11-15 03:01:03.150150407&quot;}
+?[36m12:01:03.634?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /delete, PARAM: {&quot;id&quot;:&quot;573&quot;,&quot;update_date&quot;:&quot;2019-11-15 03:01:03.163163136&quot;}
+?[36m12:01:03.646?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /delete, PARAM: {&quot;id&quot;:&quot;574&quot;,&quot;update_date&quot;:&quot;2019-11-15 03:01:03.181181493&quot;}
+?[36m12:01:03.662?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /delete, PARAM: {&quot;id&quot;:&quot;575&quot;,&quot;update_date&quot;:&quot;2019-11-15 03:01:03.213213783&quot;}
+?[36m12:01:03.674?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /delete, PARAM: {&quot;id&quot;:&quot;576&quot;,&quot;update_date&quot;:&quot;2019-11-15 03:01:03.227227538&quot;}
+?[36m12:01:03.686?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /delete, PARAM: {&quot;id&quot;:&quot;577&quot;,&quot;update_date&quot;:&quot;2019-11-15 03:01:03.238238355&quot;}
+?[36m12:01:03.702?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /delete, PARAM: {&quot;id&quot;:&quot;578&quot;,&quot;update_date&quot;:&quot;2019-11-15 03:01:03.250250262&quot;}
+?[36m12:01:03.711?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /delete, PARAM: {&quot;id&quot;:&quot;579&quot;,&quot;update_date&quot;:&quot;2019-11-15 03:01:03.260260966&quot;}
+?[36m12:01:03.720?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /delete, PARAM: {&quot;id&quot;:&quot;580&quot;,&quot;update_date&quot;:&quot;2019-11-15 03:01:03.271271804&quot;}
+?[36m12:01:03.746?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /delete, PARAM: {&quot;id&quot;:&quot;581&quot;,&quot;update_date&quot;:&quot;2019-11-15 03:01:03.281281961&quot;}
+?[36m12:01:03.777?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /create, PARAM: {&quot;no&quot;:1,&quot;book_id&quot;:1,&quot;book_name&quot;:&quot;テスト書籍名&quot;,&quot;page&quot;:&quot;1234&quot;,&quot;publisher&quot;:&quot;テスト出版社&quot;,&quot;sale_date&quot;:&quot;2019/01/01&quot;,&quot;isbn&quot;:&quot;1234567890123&quot;,&quot;book_note&quot;:&quot;テスト備考＿書籍&quot;,&quot;author_name&quot;:&quot;テスト著者&quot;,&quot;author_note&quot;:&quot;テスト備考＿著者&quot;}
+?[36m12:01:03.807?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /delete, PARAM: {&quot;id&quot;:&quot;582&quot;,&quot;update_date&quot;:&quot;2019-11-15 03:01:03.788788735&quot;}
+?[36m12:01:03.841?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /create, PARAM: {&quot;no&quot;:1,&quot;book_id&quot;:1,&quot;book_name&quot;:&quot;テスト書籍名1&quot;,&quot;page&quot;:&quot;1234&quot;,&quot;publisher&quot;:&quot;テスト出版社&quot;,&quot;sale_date&quot;:&quot;2019/01/01&quot;,&quot;isbn&quot;:&quot;1234567890123&quot;,&quot;book_note&quot;:&quot;テスト備考＿書籍&quot;,&quot;author_name&quot;:&quot;テスト著者1&quot;,&quot;author_note&quot;:&quot;テスト備考＿著者&quot;}
+?[36m12:01:03.849?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /create, PARAM: {&quot;no&quot;:1,&quot;book_id&quot;:1,&quot;book_name&quot;:&quot;テスト書籍名2&quot;,&quot;page&quot;:&quot;1234&quot;,&quot;publisher&quot;:&quot;テスト出版社&quot;,&quot;sale_date&quot;:&quot;2019/01/01&quot;,&quot;isbn&quot;:&quot;1234567890123&quot;,&quot;book_note&quot;:&quot;テスト備考＿書籍&quot;,&quot;author_name&quot;:&quot;テスト著者2&quot;,&quot;author_note&quot;:&quot;テスト備考＿著者&quot;}
+?[36m12:01:03.879?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /delete, PARAM: {&quot;id&quot;:&quot;583&quot;,&quot;update_date&quot;:&quot;2019-11-15 03:01:03.852852998&quot;}
+?[36m12:01:03.887?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /delete, PARAM: {&quot;id&quot;:&quot;584&quot;,&quot;update_date&quot;:&quot;2019-11-15 03:01:03.860860422&quot;}
+?[36m12:01:05.119?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /create, PARAM: {&quot;no&quot;:1,&quot;book_id&quot;:1,&quot;book_name&quot;:&quot;テスト書籍名&quot;,&quot;page&quot;:&quot;1234&quot;,&quot;publisher&quot;:&quot;テスト出版社&quot;,&quot;sale_date&quot;:&quot;2019/01/01&quot;,&quot;isbn&quot;:&quot;1234567890123&quot;,&quot;book_note&quot;:&quot;テスト備考＿書籍&quot;,&quot;author_name&quot;:&quot;テスト著者&quot;,&quot;author_note&quot;:&quot;テスト備考＿著者&quot;}
+?[36m12:01:05.136?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /update, PARAM: {&quot;no&quot;:1,&quot;book_id&quot;:585,&quot;book_name&quot;:&quot;テスト書籍名＿更新&quot;,&quot;page&quot;:&quot;4321&quot;,&quot;publisher&quot;:&quot;テスト出版社＿更新&quot;,&quot;sale_date&quot;:&quot;2020/12/31&quot;,&quot;isbn&quot;:&quot;3210987654321&quot;,&quot;book_note&quot;:&quot;テスト備考＿書籍＿更新&quot;,&quot;author_id&quot;:&quot;649&quot;,&quot;author_name&quot;:&quot;テスト著者＿更新&quot;,&quot;author_note&quot;:&quot;テスト備考＿著者＿更新&quot;,&quot;book_update_date&quot;:&quot;2019-11-15 03:01:05.132132453&quot;,&quot;author_update_date&quot;:&quot;2019-11-15 03:01:05.132132453&quot;}
+?[36m12:01:05.179?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /delete, PARAM: {&quot;id&quot;:&quot;585&quot;,&quot;update_date&quot;:&quot;2019-11-15 03:01:05.149149647&quot;}
+?[36m12:01:05.209?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /create, PARAM: {&quot;no&quot;:1,&quot;book_id&quot;:1,&quot;book_name&quot;:&quot;テスト書籍名&quot;,&quot;page&quot;:&quot;1234&quot;,&quot;publisher&quot;:&quot;テスト出版社&quot;,&quot;sale_date&quot;:&quot;2019/01/01&quot;,&quot;isbn&quot;:&quot;1234567890123&quot;,&quot;book_note&quot;:&quot;テスト備考＿書籍&quot;,&quot;author_name&quot;:&quot;テスト著者&quot;,&quot;author_note&quot;:&quot;テスト備考＿著者&quot;}
+?[36m12:01:05.223?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /delete, PARAM: {&quot;id&quot;:&quot;586&quot;,&quot;update_date&quot;:&quot;2019-11-15 03:01:05.221221336&quot;}
+?[36m12:01:05.272?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /create, PARAM: {&quot;no&quot;:1,&quot;book_id&quot;:1,&quot;book_name&quot;:&quot;テスト書籍名&quot;,&quot;page&quot;:&quot;1234&quot;,&quot;publisher&quot;:&quot;テスト出版社&quot;,&quot;sale_date&quot;:&quot;2019/01/01&quot;,&quot;isbn&quot;:&quot;1234567890123&quot;,&quot;book_note&quot;:&quot;テスト備考＿書籍&quot;,&quot;author_name&quot;:&quot;テスト著者&quot;,&quot;author_note&quot;:&quot;テスト備考＿著者&quot;}
+?[36m12:01:05.279?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /create, PARAM: {&quot;no&quot;:1,&quot;book_id&quot;:1,&quot;book_name&quot;:&quot;テスト書籍名&quot;,&quot;page&quot;:&quot;1234&quot;,&quot;publisher&quot;:&quot;テスト出版社&quot;,&quot;sale_date&quot;:&quot;2019/01/01&quot;,&quot;isbn&quot;:&quot;1234567890123&quot;,&quot;book_note&quot;:&quot;テスト備考＿書籍&quot;,&quot;author_name&quot;:&quot;テスト著者&quot;,&quot;author_note&quot;:&quot;テスト備考＿著者&quot;}
+?[36m12:01:05.326?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /delete, PARAM: {&quot;id&quot;:&quot;587&quot;,&quot;update_date&quot;:&quot;2019-11-15 03:01:05.283283943&quot;}
+?[36m12:01:06.914?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /create, PARAM: {&quot;no&quot;:1,&quot;book_id&quot;:1,&quot;book_name&quot;:&quot;テスト書籍名&quot;,&quot;page&quot;:&quot;1234&quot;,&quot;publisher&quot;:&quot;テスト出版社&quot;,&quot;sale_date&quot;:&quot;2019/01/01&quot;,&quot;isbn&quot;:&quot;1234567890123&quot;,&quot;book_note&quot;:&quot;テスト備考＿書籍&quot;,&quot;author_name&quot;:&quot;テスト著者&quot;,&quot;author_note&quot;:&quot;テスト備考＿著者&quot;}
+?[36m12:01:06.938?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /update, PARAM: {&quot;no&quot;:1,&quot;book_id&quot;:588,&quot;book_name&quot;:&quot;テスト書籍名＿更新&quot;,&quot;page&quot;:&quot;4321&quot;,&quot;publisher&quot;:&quot;テスト出版社＿更新&quot;,&quot;sale_date&quot;:&quot;2020/12/31&quot;,&quot;isbn&quot;:&quot;3210987654321&quot;,&quot;book_note&quot;:&quot;テスト備考＿書籍＿更新&quot;,&quot;author_id&quot;:&quot;653&quot;,&quot;author_name&quot;:&quot;テスト著者＿更新&quot;,&quot;author_note&quot;:&quot;テスト備考＿著者＿更新&quot;,&quot;book_update_date&quot;:&quot;2019-11-15 03:01:06.934934072&quot;,&quot;author_update_date&quot;:&quot;2019-11-15 03:01:06.934934072&quot;}
+?[36m12:01:06.949?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /update, PARAM: {&quot;no&quot;:1,&quot;book_id&quot;:588,&quot;book_name&quot;:&quot;テスト書籍名＿更新&quot;,&quot;page&quot;:&quot;4321&quot;,&quot;publisher&quot;:&quot;テスト出版社＿更新&quot;,&quot;sale_date&quot;:&quot;2020/12/31&quot;,&quot;isbn&quot;:&quot;3210987654321&quot;,&quot;book_note&quot;:&quot;テスト備考＿書籍＿更新&quot;,&quot;author_id&quot;:&quot;653&quot;,&quot;author_name&quot;:&quot;テスト著者＿更新&quot;,&quot;author_note&quot;:&quot;テスト備考＿著者＿更新&quot;,&quot;book_update_date&quot;:&quot;2019-11-15 03:01:06.934934072&quot;,&quot;author_update_date&quot;:&quot;2019-11-15 03:01:06.934934072&quot;}
+?[36m12:01:06.969?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /delete, PARAM: {&quot;id&quot;:&quot;588&quot;,&quot;update_date&quot;:&quot;2019-11-15 03:01:06.952952518&quot;}
+?[36m12:01:06.994?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /create, PARAM: {&quot;no&quot;:1,&quot;book_id&quot;:1,&quot;book_name&quot;:&quot;テスト書籍名&quot;,&quot;page&quot;:&quot;1234&quot;,&quot;publisher&quot;:&quot;テスト出版社&quot;,&quot;sale_date&quot;:&quot;2019/01/01&quot;,&quot;isbn&quot;:&quot;1234567890123&quot;,&quot;book_note&quot;:&quot;テスト備考＿書籍&quot;,&quot;author_name&quot;:&quot;テスト著者&quot;,&quot;author_note&quot;:&quot;テスト備考＿著者&quot;}
+?[36m12:01:07.010?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /delete, PARAM: {&quot;id&quot;:&quot;589&quot;,&quot;update_date&quot;:&quot;2019-11-15 03:01:07.009009349&quot;}
+?[36m12:01:07.019?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /update, PARAM: {&quot;no&quot;:1,&quot;book_id&quot;:589,&quot;book_name&quot;:&quot;テスト書籍名＿更新&quot;,&quot;page&quot;:&quot;4321&quot;,&quot;publisher&quot;:&quot;テスト出版社＿更新&quot;,&quot;sale_date&quot;:&quot;2020/12/31&quot;,&quot;isbn&quot;:&quot;3210987654321&quot;,&quot;book_note&quot;:&quot;テスト備考＿書籍＿更新&quot;,&quot;author_id&quot;:&quot;655&quot;,&quot;author_name&quot;:&quot;テスト著者＿更新&quot;,&quot;author_note&quot;:&quot;テスト備考＿著者＿更新&quot;,&quot;book_update_date&quot;:&quot;2019-11-15 03:01:07.009009349&quot;,&quot;author_update_date&quot;:&quot;2019-11-15 03:01:07.009009349&quot;}
+?[36m12:01:07.052?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /create, PARAM: {&quot;no&quot;:1,&quot;book_id&quot;:1,&quot;book_name&quot;:&quot;テスト書籍名&quot;,&quot;page&quot;:&quot;1234&quot;,&quot;publisher&quot;:&quot;テスト出版社&quot;,&quot;sale_date&quot;:&quot;2019/01/01&quot;,&quot;isbn&quot;:&quot;1234567890123&quot;,&quot;book_note&quot;:&quot;テスト備考＿書籍&quot;,&quot;author_name&quot;:&quot;テスト著者A&quot;,&quot;author_note&quot;:&quot;テスト備考＿著者&quot;}
+?[36m12:01:07.061?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /create, PARAM: {&quot;no&quot;:1,&quot;book_id&quot;:1,&quot;book_name&quot;:&quot;テスト書籍名&quot;,&quot;page&quot;:&quot;1234&quot;,&quot;publisher&quot;:&quot;テスト出版社&quot;,&quot;sale_date&quot;:&quot;2019/01/01&quot;,&quot;isbn&quot;:&quot;1234567890123&quot;,&quot;book_note&quot;:&quot;テスト備考＿書籍&quot;,&quot;author_name&quot;:&quot;テスト著者B&quot;,&quot;author_note&quot;:&quot;テスト備考＿著者&quot;}
+?[36m12:01:07.098?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /update, PARAM: {&quot;no&quot;:1,&quot;book_id&quot;:591,&quot;book_name&quot;:&quot;テスト書籍名&quot;,&quot;page&quot;:&quot;4321&quot;,&quot;publisher&quot;:&quot;テスト出版社＿更新&quot;,&quot;sale_date&quot;:&quot;2020/12/31&quot;,&quot;isbn&quot;:&quot;3210987654321&quot;,&quot;book_note&quot;:&quot;テスト備考＿書籍＿更新&quot;,&quot;author_id&quot;:&quot;657&quot;,&quot;author_name&quot;:&quot;テスト著者A&quot;,&quot;author_note&quot;:&quot;テスト備考＿著者＿更新&quot;,&quot;book_update_date&quot;:&quot;2019-11-15 03:01:07.074074826&quot;,&quot;author_update_date&quot;:&quot;2019-11-15 03:01:07.074074826&quot;}
+?[36m12:01:07.127?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /delete, PARAM: {&quot;id&quot;:&quot;590&quot;,&quot;update_date&quot;:&quot;2019-11-15 03:01:07.066066060&quot;}
+?[36m12:01:07.136?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /delete, PARAM: {&quot;id&quot;:&quot;591&quot;,&quot;update_date&quot;:&quot;2019-11-15 03:01:07.074074826&quot;}
+?[36m12:01:07.170?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /create, PARAM: {&quot;no&quot;:1,&quot;book_id&quot;:1,&quot;book_name&quot;:&quot;テスト書籍名&quot;,&quot;page&quot;:&quot;1234&quot;,&quot;publisher&quot;:&quot;テスト出版社&quot;,&quot;sale_date&quot;:&quot;2019/01/01&quot;,&quot;isbn&quot;:&quot;1234567890123&quot;,&quot;book_note&quot;:&quot;テスト備考＿書籍&quot;,&quot;author_name&quot;:&quot;テスト著者&quot;,&quot;author_note&quot;:&quot;テスト備考＿著者&quot;}
+?[36m12:01:07.183?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /update, PARAM: {&quot;no&quot;:1,&quot;book_id&quot;:592,&quot;book_name&quot;:&quot;テスト書籍名＿更新&quot;,&quot;page&quot;:&quot;4321&quot;,&quot;publisher&quot;:&quot;テスト出版社＿更新&quot;,&quot;sale_date&quot;:&quot;2020/12/31&quot;,&quot;isbn&quot;:&quot;3210987654321&quot;,&quot;book_note&quot;:&quot;テスト備考＿書籍＿更新&quot;,&quot;author_id&quot;:&quot;658&quot;,&quot;author_name&quot;:&quot;テスト著者＿更新&quot;,&quot;author_note&quot;:&quot;テスト備考＿著者＿更新&quot;,&quot;book_update_date&quot;:&quot;2019-11-15 03:01:07.183183336&quot;,&quot;author_update_date&quot;:&quot;2019-11-15 03:01:07.183183336&quot;}
+?[36m12:01:07.197?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /delete, PARAM: {&quot;id&quot;:&quot;592&quot;,&quot;update_date&quot;:&quot;2019-11-15 03:01:07.183183336&quot;}
+?[36m12:01:07.213?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /delete, PARAM: {&quot;id&quot;:&quot;592&quot;,&quot;update_date&quot;:&quot;2019-11-15 03:01:07.197197962&quot;}
+?[36m12:01:07.242?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /create, PARAM: {&quot;no&quot;:1,&quot;book_id&quot;:1,&quot;book_name&quot;:&quot;テスト書籍名&quot;,&quot;page&quot;:&quot;1234&quot;,&quot;publisher&quot;:&quot;テスト出版社&quot;,&quot;sale_date&quot;:&quot;2019/01/01&quot;,&quot;isbn&quot;:&quot;1234567890123&quot;,&quot;book_note&quot;:&quot;テスト備考＿書籍&quot;,&quot;author_name&quot;:&quot;テスト著者&quot;,&quot;author_note&quot;:&quot;テスト備考＿著者&quot;}
+?[36m12:01:07.256?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /delete, PARAM: {&quot;id&quot;:&quot;593&quot;,&quot;update_date&quot;:&quot;2019-11-15 03:01:07.255255436&quot;}
+?[36m12:01:07.265?[0;39m ?[1;30m[RxCachedThreadScheduler-1]?[0;39m ?[39mDEBUG?[0;39m ?[35mserver.service.LogService?[0;39m - REQUEST URI: /delete, PARAM: {&quot;id&quot;:&quot;593&quot;,&quot;update_date&quot;:&quot;2019-11-15 03:01:07.255255436&quot;}
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 5.5</a> at 2019/11/15 12:01:07</p>
+</div>
+</div>
+</body>
+</html>

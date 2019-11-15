@@ -32,6 +32,8 @@
 
       // 新規登録入力フォーム保存
       var create_form = {};
+      // 編集入力フォーム保存
+      var edit_form = {};
 
       // フォーム項目配列
       const form_items = ['book_id', 'book_name', 'page', 'publisher', 'isbn', 'sale_date',
@@ -183,11 +185,12 @@
             </h4>
             <form class="ui form success" method="post" onreset="return preClear();">
               <div class="inline fields">
-                <div class="two wide required field">
+                <div id="book_name_title"class="two wide required field">
                   <label>書籍名</label>
                 </div>
                 <div id="book_name_field" class="fourteen wide field">
                   <input id="book_name" name="book_name" type="text" maxlength="255" onblur="requireCheck('#book_name', '書籍名');" placeholder="書籍名">
+                  <label id="book_name_label" name="book_name_label"></label>
                 </div>
               </div>
               <div class="inline fields">

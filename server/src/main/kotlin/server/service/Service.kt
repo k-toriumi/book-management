@@ -33,7 +33,7 @@ class Service(var dbManager: DbManager) {
 
         var result = dbManager.insert(book, author)
         if (0 < result) {
-            return getErrorJsonMessage("該当の書籍の情報は他のユーザによって変更されました最新の情報を確認してください")
+            return getErrorJsonMessage("書籍の登録に失敗しました<br>再度やり直してください")
         }
         return ""
     }
@@ -105,10 +105,10 @@ class Service(var dbManager: DbManager) {
         // 変更前の書籍情報を取得する
         var bookList = dbManager.select(3, null, null, book.id)
         if (bookList.isEmpty()) {
-            return getErrorJsonMessage("該当の書籍は他のユーザによって変更されました。<br>最新の情報を確認してください")
+            return getErrorJsonMessage("該当の書籍は他のユーザによって削除されました。<br>最新の情報を確認してください")
         }
         val beforeBook = bookList[0]
-        if (book.name != beforeBook.book_name) {
+        if (author.name != beforeBook.author_name) {
             // 重複チェック
             if (!dbManager.duplicateCheck(book.name, author.name)) {
                 return getErrorJsonMessage("該当の著者の書籍はすでに登録済です")
@@ -137,16 +137,16 @@ class Service(var dbManager: DbManager) {
             return getErrorJsonMessage("該当の書籍は他のユーザによって削除されました。<br>最新の情報を確認してください")
         }
         var bookInfo = bookList[0]
-        var book = Book(bookInfo.book_id, bookInfo.book_name, toInt(bookInfo.page), bookInfo.publisher, bookInfo.isbn, toLocalDate(bookInfo.sale_date), bookInfo.book_note, toInt(bookInfo.author_id), toLocalDateTime(bookInfo.book_update_date))
+        var book = Book(toInt(id), bookInfo.book_name, toInt(bookInfo.page), bookInfo.publisher, bookInfo.isbn, toLocalDate(bookInfo.sale_date), bookInfo.book_note, toInt(bookInfo.author_id), toLocalDateTime(update_date))
         var author = Author(toInt(bookInfo.author_id), bookInfo.author_name, bookInfo.author_note, toLocalDateTime(bookInfo.author_update_date))
 
         if (!dbManager.deleteBook(book, author)) {
-            return getErrorJsonMessage("該当の書籍は他のユーザによって削除されました。<br>最新の情報を確認してください")
+            return getErrorJsonMessage("該当の書籍は他のユーザによって変更されました。<br>最新の情報を確認してください")
         }
         return ""
     }
 
-    
+
     /**
      * String → Int 変換処理
      *

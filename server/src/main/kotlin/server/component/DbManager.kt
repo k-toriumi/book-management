@@ -250,6 +250,8 @@ class DbManager(var client: PgPool) {
 
                 // 著者が書籍に紐づかなくなった場合は削除する
                 deleteAuthor(tran, author)
+            } else {
+                throw Exception("exclusive error")
             }
         }.onSuccess {
             tran.commit()
@@ -298,7 +300,6 @@ class DbManager(var client: PgPool) {
     private fun selectAuthorForUpdate(tran: PgTransaction, author: Author): Boolean {
         return tran.rxPreparedQuery("SELECT * FROM author WHERE id = $1 FOR UPDATE NOWAIT", Tuple.of(author.id))
                 .map<Boolean> {
-                    // 更新日時を比較
                     if (it.size() == 1) {
                         return@map true
                     }
@@ -363,8 +364,8 @@ class DbManager(var client: PgPool) {
 
         if (selectBookForUpdate(tran, book)) {
             tran.rxPreparedQuery(
-                    "UPDATE book SET name=$2, page=$3, publisher=$4, sale_date=$5, isbn=$6, note=$7, author_id=$8, update_date=now() WHERE id = $1",
-                    Tuple.newInstance(io.reactiverse.pgclient.Tuple.of(book.id, book.name, book.page, book.publisher, book.sale_date, book.isbn, book.note, book.author_id))
+                    "UPDATE book SET page=$2, publisher=$3, sale_date=$4, isbn=$5, note=$6, author_id=$7, update_date=now() WHERE id = $1",
+                    Tuple.newInstance(io.reactiverse.pgclient.Tuple.of(book.id, book.page, book.publisher, book.sale_date, book.isbn, book.note, book.author_id))
             ).map<Int> {
                 return@map it.rowCount()
             }.blockingGet()

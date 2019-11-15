@@ -8,7 +8,6 @@ function postRequest(type, ope, url, target, json) {
   $('#modal_button').text(ope);
 
   $('.mini.modal').modal({
-    detachable : false,
     closable  : false,
     inverted: true,
     onDeny    : function(){},
@@ -239,6 +238,10 @@ function searchList(url){
   }).done(function(res) {
     setTable(res);
     setPager(res);
+    if(now_page > 1 && table_obj.length === 0) {
+      var page = now_page - 1;
+      clickPage(page);
+    }
   }).fail(function(XMLHttpRequest, textStatus, errorThrown) {
     setError(XMLHttpRequest, textStatus, errorThrown);
   });
@@ -344,7 +347,12 @@ function create(id) {
       $('#button2').text('クリア');
 
       // フォームの入力内容を復元する
-      setCreateForm();
+      setForm(create_form);
+
+      // 書籍名を書き込み可能に変える
+      $('#book_name_title').addClass('required');
+      $('#book_name_label').hide();
+      $('#book_name').show();
 
       $('#input_area').transition('horizontal flip');
     });
@@ -378,10 +386,18 @@ function edit(id) {
       $('#button2').text('戻す');
 
       // 登録フォームの内容を保存
-      saveCreateForm();
+      saveForm(create_form);
 
       // フォームに値を設定する
       setEditForm(id)
+
+      // 編集フォームの内容を保存
+      saveForm(edit_form)
+
+      // 書籍名を読み取り専用に変える
+      $('#book_name_title').removeClass('required');
+      $('#book_name').hide();
+      $('#book_name_label').show();
 
       $('#input_area').transition('horizontal flip');
     });
@@ -391,6 +407,8 @@ function edit(id) {
   } else {
       // フォームに値を設定する
       setEditForm(id)
+      // 編集フォームの内容を保存
+      saveForm(edit_form)
   }
 }
 
@@ -400,6 +418,7 @@ function setEditForm(id) {
   Object.keys(obj).forEach(function(item) {
     $('#' + item).val(obj[item]);
   });
+  $('#book_name_label').text($('#book_name').val());
 }
 
 // 表示・非表示切り替え処理
@@ -425,7 +444,8 @@ function toggleArea() {
 // クリア／戻すボタン押下処理
 function preClear() {
   if(mode===2) {
-    setEditForm($('#book_id').val());
+    // フォームの入力内容を復元する
+    setForm(edit_form);
     return false;
   }
   return true;
@@ -449,16 +469,17 @@ function getRowData(id) {
   return form;
 }
 
-// 書籍を登録するフォーム欄保存処理
-function saveCreateForm() {
+// フォーム欄保存処理
+function saveForm(form) {
   form_items.forEach(function(item) {
-    create_form[item] = $('#' + item).val();
+    form[item] = $('#' + item).val();
   });
 }
 
-// 書籍を登録するフォーム欄復元処理
-function setCreateForm() {
-  Object.keys(create_form).forEach(function(item) {
-    $('#' + item).val(create_form[item]);
+// フォーム欄復元処理
+function setForm(form) {
+  Object.keys(form).forEach(function(item) {
+    $('#' + item).val(form[item]);
   });
+  $('#book_name_label').text($('#book_name').val());
 }
