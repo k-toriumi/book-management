@@ -1,0 +1,5 @@
+profile: function-aws
+defaultPackage: read
+---
+testFramework: junit
+sourceLanguage: kotlin

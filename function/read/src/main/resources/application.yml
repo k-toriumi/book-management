@@ -1,0 +1,14 @@
+---
+micronaut:
+  function:
+    name: read
+
+---
+postgres:
+  reactive:
+    client:
+      port: 5432
+      database: book_database
+#      user: user
+#      password: password
+#      maxSize: 5
