@@ -8,9 +8,12 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.7.8/dist/semantic.min.css">
     <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.7.8/dist/semantic.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/2.3.22/rx.lite.js"></script>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
     <script src="./js/function.js"></script>
     <link href="./css/style.css" rel="stylesheet" />
-    <script>
+    <script type="text/babel">
 
       // サーバURL
       const server_url = 'https://book-management.k-toriumi.com';
@@ -42,6 +45,173 @@
       // 初期表示処理
       window.onload = function() {
 
+        function Home(props) {
+          return <a href="." className="header item"><i className="book icon"></i>書籍管理</a>;
+        }
+
+        function Label(props) {
+          return <label>{props.name}</label>;
+        }
+
+        function TextBox(props) {
+          return <input id={props.id} name={props.name} type={props.type} maxLength={props.maxlength} placeholder={props.placeholder} />;
+        }
+        function Button(props) {
+          return <button id={props.id} type={props.type} className={props.class}>
+                  {props.value}
+                </button>;
+        }
+        function TextBoxBookName(props) {
+          const mode = props.mode;
+          if(mode == 1) {
+            return <input id={props.id} name={props.name} type={props.type} maxLength={props.maxlength} placeholder={props.placeholder} />;
+          } else {
+            return <label id={props.id} name={props.name}></label>;
+          }
+        }
+
+        function SerchBox(props) {
+          return <React.Fragment>
+                  <div className="ui icon input">
+                    <input  id={props.id} name={props.name} className="prompt" type="text" maxLength={props.maxlength} placeholder={props.placeholder} />
+                    <i className="search icon"></i>
+                  </div>
+                  <div className="results"></div>
+                </React.Fragment>
+        }
+
+        class TextBoxOnlyNumber extends React.Component {
+          leaveOnlyNumber(e){
+            // 数字以外の不要な文字を削除
+            var st = String.fromCharCode(e.which);
+            if ("0123456789".indexOf(st,0) < 0) { e.preventDefault(); }
+          }
+
+          render() {
+            return (
+              <input id={this.props.id}
+                name={this.props.name}
+                type={this.props.type}
+                size={this.props.size}
+                maxLength={this.props.maxlength}
+                placeholder={this.props.placeholder}
+                onKeyPress={this.leaveOnlyNumber}
+               />
+            );
+          }
+        }
+
+        class CalendarTextBox extends React.Component {
+          render() {
+            return (
+                <div className="ui input left icon">
+                  <i className="calendar icon"></i>
+                  <input id={this.props.id}
+                    name={this.props.name}
+                    size={this.props.size}
+                    maxLength={this.props.maxlength}
+                    type={this.props.type}
+                    placeholder={this.props.placeholder}
+                  />
+                </div>
+            );
+          }
+        }
+
+        class TextArea extends React.Component {
+          render() {
+            return (
+              <textarea rows={this.props.rows}
+                id={this.props.id}
+                name={this.props.name}
+                maxLength={this.props.maxlength}
+                placeholder={this.props.placeholder}></textarea>
+            );
+          }
+        }
+        ReactDOM.render(
+          <Home />,
+          document.getElementById('home')
+        );
+        ReactDOM.render(
+          <SerchBox id="search_box" name="search_box" maxlength="255" placeholder="著者" />,
+          document.getElementById('search_area')
+        );
+        ReactDOM.render(
+          <Label name="書籍名" />,
+          document.getElementById('book_name_title')
+        );
+        ReactDOM.render(
+          <TextBoxBookName mode={1} id="book_name" name="book_name" type="text" maxlength="255" onblur="requireCheck('#book_name', '書籍名');" placeholder="書籍名" />,
+          document.getElementById('book_name_textbox')
+        );
+        ReactDOM.render(
+          <Label name="出版社" />,
+          document.getElementById('publisher_label')
+        );
+        ReactDOM.render(
+          <TextBox id="publisher" name="publisher" type="text" maxlength="255" placeholder="出版社" />,
+          document.getElementById('publisher_textbox')
+        );
+        ReactDOM.render(
+          <Label name="ISBN" />,
+          document.getElementById('isbn_label')
+        );
+        ReactDOM.render(
+          <TextBoxOnlyNumber id="isbn" name="isbn" type="tel" size="13" maxlength="13" placeholder="ISBN" />,
+          document.getElementById('isbn_textbox')
+        );
+        ReactDOM.render(
+          <Label name="ページ数" />,
+          document.getElementById('page_label')
+        );
+        ReactDOM.render(
+          <TextBoxOnlyNumber id="page" name="page" type="tel" size="4" maxlength="4" placeholder="ページ数" />,
+          document.getElementById('page_textbox')
+        );
+        ReactDOM.render(
+          <Label name="発売日" />,
+          document.getElementById('sale_date_label')
+        );
+        ReactDOM.render(
+          <CalendarTextBox id="sale_date" name="sale_date" size="10" maxlength="10" type="tel" placeholder="発売日" />,
+          document.getElementById('calendar_textbox')
+        );
+        ReactDOM.render(
+          <Label name="備考" />,
+          document.getElementById('book_note_label')
+        );
+        ReactDOM.render(
+          <TextArea rows="2" id="book_note" name="book_note" maxlength="1000" placeholder="備考" />,
+          document.getElementById('book_note_textarea')
+        );
+        ReactDOM.render(
+          <Label name="著者" />,
+          document.getElementById('author_label')
+        );
+
+        ReactDOM.render(
+          <SerchBox id="author_name" name="author_name" class="prompt" type="text" maxlength="255" onblur="requireCheck('#author_name', '著者');" placeholder="著者" />,
+          document.getElementById('author_name_field')
+        );
+        ReactDOM.render(
+          <Label name="詳細" />,
+          document.getElementById('author_note_label')
+        );
+
+        ReactDOM.render(
+          <TextArea rows="2" id="author_note" name="author_note" maxlength="1000" placeholder="詳細" />,
+          document.getElementById('author_note_textarea')
+        );
+        ReactDOM.render(
+          <Button id="button1" class="ui blue button" type="submit" value="登録" />,
+          document.getElementById('submit_button')
+        );
+        ReactDOM.render(
+          <Button id="button2" class="ui button" type="reset" value="クリア" />,
+          document.getElementById('reset_button')
+        );
+
         // 新規登録ボタン非表示
         $('#create').hide();
 
@@ -49,10 +219,10 @@
         $('#pager_area').hide();
 
         // ISBNテキストボックスの設定
-        $('#isbn').on("keypress", function(event){return leaveOnlyNumber(event);});
+        // $('#isbn').on("keypress", function(event){return leaveOnlyNumber(event);});
 
         // ページ数テキストボックスの設定
-        $('#page').on("keypress", function(event){return leaveOnlyNumber(event);});
+        // $('#page').on("keypress", function(event){return leaveOnlyNumber(event);});
 
         // カレンダーの設定
         $('.ui.calendar').calendar({
@@ -117,17 +287,9 @@
   </head>
   <body>
     <div class="ui inverted menu">
-        <a href="." class="header item">
-          <i class="book icon"></i>書籍管理
-        </a>
+        <div id="home"></div>
         <div class="ui labeled input">
-          <div id="search_area" class="ui search">
-            <div class="ui icon input">
-              <input id="search_box" class="prompt" type="text" placeholder="著者">
-              <i class="search icon"></i>
-            </div>
-            <div class="results"></div>
-          </div>
+          <div id="search_area" class="ui search"></div>
         </div>
       <div class="ui right inverted menu">
         <a id="create" class="ui violet item active" onclick="create();">新規登録</a>
@@ -178,80 +340,41 @@
           </div>
         </div>
         <div id="input_area" class="column" align="left">
-
           <div id="input_segment" class="ui blue segment">
             <h4 id="input_title" class="ui horizontal left aligned divider header">
               <i class="plus square outline icon"></i>書籍を登録する
             </h4>
             <form class="ui form success" method="post" onreset="return preClear();">
               <div class="inline fields">
-                <div id="book_name_title"class="two wide required field">
-                  <label>書籍名</label>
-                </div>
-                <div id="book_name_field" class="fourteen wide field">
-                  <input id="book_name" name="book_name" type="text" maxlength="255" onblur="requireCheck('#book_name', '書籍名');" placeholder="書籍名">
-                  <label id="book_name_label" name="book_name_label"></label>
-                </div>
+                <div id="book_name_title" class="two wide required field"></div>
+                <div id="book_name_textbox" class="fourteen wide field"></div>
               </div>
               <div class="inline fields">
-                <div class="two wide field">
-                  <label>出版社</label>
-                </div>
-                <div class="four wide field">
-                  <input id="publisher" name="publisher" type="text" maxlength="255" placeholder="出版社">
-                </div>
-                  <label>ISBN</label>
-                <div class="four wide field">
-                  <input id="isbn" name="isbn" type="tel" size="13" maxlength="13" placeholder="ISBN">
-                </div>
-                <label>ページ数</label>
-                <div class="three wide field">
-                  <input id="page" name="page" type="tel" size="4" maxlength="4" placeholder="ページ数">
-                </div>
+                <div id="publisher_label" class="two wide field"></div>
+                <div id="publisher_textbox" class="four wide field"></div>
+                <div id="isbn_label" class="wide field"></div>
+                <div id="isbn_textbox" class="four wide field"></div>
+                <div id="page_label" class="two wide field"></div>
+                <div id="page_textbox" class="three wide field"></div>
               </div>
               <div class="inline fields">
-                <div class="two wide field">
-                <label>発売日</label>
-                </div>
-                <div class="ui calendar">
-                  <div class="ui input left icon">
-                    <i class="calendar icon"></i>
-                    <input id="sale_date" name="sale_date" size="10" maxlength="10" type="tel" placeholder="発売日">
-                  </div>
-                </div>
+                <div id="sale_date_label" class="two wide field"></div>
+                <div id="calendar_textbox" class="ui calendar"></div>
               </div>
               <div class="inline fields">
-                <div class="two wide field">
-                  <label>備考</label>
-                </div>
-                <div class="fourteen wide field">
-                <textarea rows="2" id="book_note" name="book_note" maxlength="1000" placeholder="備考"></textarea>
-                </div>
+                <div id="book_note_label" class="two wide field"></div>
+                <div id="book_note_textarea"class="fourteen wide field"></div>
               </div>
               <div class="ui divider"></div>
               <div class="inline fields">
-                <div class="two wide required field">
-                  <label>著者</label>
-                </div>
-                  <div id="author_name_field" class="five wide field ui search">
-                  <div class="ui icon input">
-                  <input  id="author_name" name="author_name" class="prompt" type="text" maxlength="255" onblur="requireCheck('#author_name', '著者');" placeholder="著者">
-                    <i class="search icon"></i>
-                  </div>
-                  <div class="results"></div>
-                </div>
-                <label>詳細</label>
-                <div class="eight wide field">
-                  <textarea rows="2" id="author_note" name="author_note" maxlength="1000" placeholder="詳細"></textarea>
-                </div>
+                <div id="author_label" class="two wide required field"></div>
+                <div id="author_name_field" class="five wide field ui search"></div>
+                <div id="author_note_label" class="wide field"></div>
+                <div id="author_note_textarea" class="eight wide field"></div>
               </div>
               <div class="ui divider"></div>
-              <button id="button1" class="ui blue button" type="submit">
-                登録
-              </button>
-              <button id="button2" class="ui button" type="reset">
-                クリア
-              </button>
+              <span id="submit_button"></span>
+              <span id="reset_button"></span>
               <input id="book_id" type="hidden" />
               <input id="book_update_date" type="hidden" />
               <input id="author_update_date" type="hidden" />
